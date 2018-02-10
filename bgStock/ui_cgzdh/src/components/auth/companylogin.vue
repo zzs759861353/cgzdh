@@ -1,7 +1,7 @@
 <template>
-<div id='companylogin' style="background-color:#fff;height:100%">
-  <el-row style="height:auto">
-    <img src="././images/logo-l.png" class='head_logo' style="margin-top:35px;"></img>
+<div id='companylogin' >
+  <el-row style="height:90px;line-height:110px">
+    <img src="././images/logo-l.png" class='head_logo' ></img>
   </el-row>
   <el-row class='logincss'>
     <el-col>
@@ -10,8 +10,6 @@
           <passwordlogin></passwordlogin>
         </el-tab-pane>
       </el-tabs>
-    </el-col>
-    <el-col>
     </el-col>
   </el-row>
 </div>
@@ -30,7 +28,8 @@ export default {
     return {
       msg: 'Welcome to Your companylogin.js App',
       styleObject: {
-        width: '320px',
+        width: '300px',
+        height:"240px"
 
       }
     }

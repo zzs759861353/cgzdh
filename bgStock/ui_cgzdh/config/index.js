@@ -28,19 +28,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/auth': {
-        target: 'http://127.0.0.1:17001',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/auth': '/auth'
-        },
-        secure: false
-      },
-      '/buss': {
+      '/cgzdh': {
         target: 'http://127.0.0.1:17002',
         changeOrigin: true,
         pathRewrite: {
-          '^/buss': '/buss'
+          '^/cgzdh': '/cgzdh'
         },
         secure: false
       },
@@ -60,15 +52,16 @@ module.exports = {
           '^/hisHq': '/hisHq'
         },
         secure: false
-      },
-      '/flashdata': {
-        target: '  http://data.gtimg.cn',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/flashdata': '/flashdata'
-        },
-        secure: false
       }
+      //分钟
+      // '/flashdata': {
+      //   target: '  http://data.gtimg.cn',
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/flashdata': '/flashdata'
+      //   },
+      //   secure: false
+      // }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

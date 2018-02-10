@@ -24,6 +24,7 @@ let routes = [{
   path: basepath + '/tactics',
   component: tactics
 }];
+
 export default {
   routes
 }

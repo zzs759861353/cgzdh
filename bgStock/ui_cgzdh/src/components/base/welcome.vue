@@ -3,13 +3,13 @@
 
     <el-row>
       <div v-for="item in items" @click="onSelectMenu(item.url,item.title)">
-        <el-col :xs="8" :sm="5" :md="3" :lg="3" :xl="3">
+        <el-col :xs="6" :sm="4" :md="3" :lg="3" :xl="2">
           <div class="clearfix  fs1    cursor-pointer">
             <div class="size1of111 ">
-              <img v-bind:src="item.classname" style='width:60px;height:60px'/>
+              <img v-bind:src="item.iconName" style='width:60px;height:60px'/>
             </div>
             <div class="size1of11">
-              <span class="mls" style='white-space:nowrap;font-size:6px'>{{item.title}}</span>
+              <span class="mls" style='white-space:nowrap;font-size:12px;color:#606060'>{{item.title}}</span>
             </div>
           </div>
         </el-col>
@@ -41,6 +41,18 @@ export default {
   },
   methods: {
     onSelectMenu: function(url, name) {
+
+      if(url=='/business/auto'){
+
+        var nowtime=new Date().getTime();
+if(nowtime>this.getuserDetail().amount){
+  this.$message({
+         message: '会员已到期，该功能无法使用，请续费！',
+         type: 'warning'
+       });
+                return;
+}
+      }
       this.$root.eventHub.$emit('we_select_menu', [{'name': name, 'url': url}]);
       //this.$router.push(url);
     },

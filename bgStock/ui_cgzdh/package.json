@@ -6,21 +6,6 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
-  },
-  "scripts": {
-    "dev": "node build/dev-server.js",
-    "start": "npm run dev",
-    "build": "node build/build.js",
-    "lint": "eslint --ext .js,.vue src",
-    "electron_dev": "npm run build && electron build/electron.js"
-  },
-  "scripts": {
-    "dev": "node build/dev-server.js",
     "start": "npm run dev",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
@@ -31,7 +16,7 @@
     "axios": "^0.16.1",
     "babel-polyfill": "^6.23.0",
     "electron-vue-debugger": "^2.0.0",
-    "element-ui": "^1.2.8",
+    "element-ui": "^2.1.0",
     "hsy-vue-dialog": "0.0.7",
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
@@ -39,7 +24,7 @@
     "polyfill": "^0.1.0",
     "report": "^0.1.1",
     "sinon": "^1.17.7",
-    "vue": "^2.2.2",
+    "vue": "^2.2.1",
     "vue-json-tree-view": "^2.1.1",
     "vue-pdf": "^1.0.6",
     "vue-resource": "^1.3.1",

@@ -2,7 +2,7 @@
 <div id="hrssEnterprisePageHeader">
 <div class="topnav"  style="background:#285890; position:absolute;z-index:899; top:0;  height:30px;">
   <div class="userinfo">
-    <span class="right_span">欢迎您，{{aab004}}</span>
+    <span class="right_span">欢迎您，{{userName}}</span>
     <el-button type="text" @click="doQuit()" style="color:#fff;font-size:12px;">退出</el-button>
   </div>
 </div>
@@ -16,11 +16,11 @@ export default {
   name: 'hrssEnterprisePageHeader',
   data() {
     return {
-      aab004: ''
+      userName: ''
     }
   },
   mounted: function () {
-    this.aab004 = this.getuserDetail().name;
+    this.userName = this.getuserDetail().userName;
   },
   methods: {
     onSelectMenu(index) {
@@ -36,7 +36,7 @@ export default {
     },
     doQuit: function() {
       var _self=this;
-      this.$axios.get('/auth/api/v0/tuser/layOut').then((response) => {
+      this.$axios.get('/cgzdh/auth/tuser/layOut').then((response) => {
         _self.clearSession();
         _self.$router.push('/');
       }).catch(function(err) {
@@ -91,7 +91,4 @@ export default {
   border-right:1px solid #fafafa;
   position: absolute;
 }
-
-
-
 </style>

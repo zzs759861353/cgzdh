@@ -3,7 +3,7 @@
   <div  style='text-align:right;margin:0 auto'>
 
     <div >
-      <el-steps :active="active" finish-status="success" style='margin:30px 0 30px 24px '>
+      <el-steps :active="active" finish-status="success" >
           <el-step title="初始化"></el-step>
           <el-step title="检测"></el-step>
           <el-step title="开始"></el-step>
@@ -30,31 +30,23 @@
         </el-select>
     </el-form-item></el-col>
       </el-row>
+      <el-row >
 
-      <el-row  >
-        <el-col :xs="22" :sm="16" :md="12" :lg="12"><el-form-item label="交易数量：" prop="jyCount" style='text-align:left'>
-          <el-radio-group v-model="jyForm.jyCount" :disabled='btnSta.csh'>
-          <el-radio label="1">全仓</el-radio>
-          <el-radio label="0.5">五成</el-radio>
-          <el-radio label="0.33">三成</el-radio>
-          <el-radio label="0.2">两成</el-radio>
-          </el-radio-group>
-        </el-form-item></el-col>
-        <el-col :xs="22" :sm="8" :md="12" :lg="12">  <el-form-item label="策略数量：" >
-            <el-input :disabled='btnSta.csh'
-              v-model="jyForm.kmsl">
-            </el-input>
+        <el-col :xs="22" :sm="12" :md="12" :lg="12">  <el-form-item label="股票名称：" prop="" >
+  <el-input v-model="ssgp[0]"  disabled></el-input>
       </el-form-item></el-col>
-
-
+      <el-col :xs="22" :sm="12" :md="12" :lg="12"><el-form-item label="当前价格：" prop="" style='text-align:left'>
+<el-input v-model="ssgp[3]"  disabled></el-input>
+    </el-form-item></el-col>
       </el-row>
-  <el-row :span='24'>
-<el-form-item>
+  <el-row >
+    <el-col :span='24'>
+
   <el-button style="margin-top: 12px;" type="primary" @click="csh" :disabled='btnSta.csh'>初始化</el-button>
   <el-button style="margin-top: 12px;" type="success" @click="starting" :disabled='btnSta.start'>开始</el-button>
   <el-button style="margin-top: 12px;" type="danger" @click="stopping" :disabled='btnSta.stop'>停止</el-button>
   <el-button style="margin-top: 12px;" type="warning" @click="reSet" :disabled='!btnSta.stop'>重置</el-button>
-</el-form-item>
+
 </el-col>
 
 </el-row>
@@ -103,7 +95,6 @@
       },
         active:0,
         ds:0,
-       clientId:sessionStorage.getItem('clientId'),
        rules:{
          gpCode: [
            { required: true, message: '请选择股票代码', trigger: 'change' }
@@ -113,9 +104,6 @@
          ],
          mrcl: [
            { required: true, message: '请选择买入策略', trigger: 'change' }
-         ],
-         jyCount: [
-           { required: true, message: '请选择活交易仓位', trigger: 'change' }
          ]
 
        },
@@ -170,11 +158,19 @@
             this.jyForm.gpCode=this.jyForm.gpCode.split(',')[0];
             this.init(this.jyForm.gpCode);
           }else{
-            alert("浏览暂不支持localStorage，请更换推荐浏览器运行")
+            _self.$message({
+              showClose: true,
+              message: '此浏览器不支持该系统',
+              type: 'error'
+            });
                }
 
           } else {
-            alert('请补全信息');
+            _self.$message({
+              showClose: true,
+              message: '请补全录入信息',
+              type: 'error'
+            });
             return false;
           }
         })
@@ -182,9 +178,13 @@
      },
      chsFinsh:function(){
        if(!this.ssgp[3]){
-         alert('当前股票存在异常请检查后重试!');return;
+         _self.$message({
+           showClose: true,
+           message: '无此股票信息，请重新选择',
+           type: 'error'
+         });return;
        }
-       this.jyForm.kmsl=Math.floor(29999.98/this.ssgp[3]*this.jyForm.jyCount/100)*100;//this.zj[2]/this.ssgp[3]/100*100;
+       //this.jyForm.kmsl=Math.floor(29999.98/this.ssgp[3]*this.jyForm.jyCount/100)*100;//this.zj[2]/this.ssgp[3]/100*100;
        if(this.active<2){
            this.active++;
        }
@@ -207,6 +207,7 @@
        this.ds = window.setInterval(this.auto,5000);
      },
      stopping:function(){
+       alert('卖出价格::'+this.jcjg+'买入价格::'+this.ssgp[3])
        window.clearInterval(this.ds);
        this.btnSta.stop=true;
        this.btnSta.start=false;

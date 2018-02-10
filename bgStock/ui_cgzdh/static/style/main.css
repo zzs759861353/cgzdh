@@ -1,58 +1,91 @@
-.el-input__inner {
-  height: 24px;
-}
-body {
+
+html,body {
+  height: 100%;
   background:#e8e9ea !important;
 }
-@media screen and (min-width:992px) and (max-width: 1199px) {
-  #app {
+#companylogin{height:100%;background-color:#fff};
 
-    margin: 0 auto;
-    text-align: center;
-  }
-  #home {
-  margin: 0 auto;
-  margin-bottom:40px;
-  text-align: center;
-}
-
-}
 
 .topnav{
   width:100%;
   padding-right: 30px
 }
 @media screen and (max-width:633px) {
+  .login-box{
+    margin:25%  auto;
+    opacity:0.6;
+
+  }
+  #app {
+    height:100%;
+    background-color: #e8e9ea;
+    margin: 0 auto;
+    text-align: center;
+  }
   .xs_font_size{
     font-size: 1px
   }
   .head_logo{
-    height:auto;width:80%
+    width:52%;
+    height: auto
   }
   #home {
 
-  margin: 0 auto;
+  margin: 0 20px;
   margin-bottom:40px;
   text-align: center;
 }
 
 }
 @media screen and (min-width: 633px) and (max-width:991px ) {
-  #app {
+  .login-box{
+    margin:22%  auto;
+    opacity:0.6;
 
+  }
+  #app {
+    height:100%;
+    background-color: #e8e9ea;
     margin: 0 auto;
     text-align: center;
   }
-
   #home {
-  margin: 0 10px;
+  margin: 0 30px;
   margin-bottom:40px;
   text-align: center;
 }
 }
-@media screen and (min-width: 1280px) {
+@media screen and (min-width:991px) and (max-width: 1280px) {
+  .login-box{
+    margin:15%  auto;
+    opacity:0.6;
+
+  }
   #app {
-    width: 1200px;
+    width: 85%;
+    height:100%;
+    background-color: #e8e9ea;
+    margin: 0 auto;
+    text-align: center;
+  }
+  #home {
+  margin: 0 40px;
+  margin-bottom:40px;
+  text-align: center;
+}
+
+}
+@media screen and (min-width: 1280px) {
+  .login-box{
+    margin:10%  auto;
+    opacity:0.6;
+
+  }
+  #app {
+    width: 80%;
+    max-width: 1440px;
+    height:100%;
+    background-color: #e8e9ea;
     margin: 0 auto;
     text-align: center;
   }
@@ -62,17 +95,21 @@ body {
     text-align: center;
     margin-bottom:40px;
   }
-  .topnav{
-    width:1200px;
-    padding-right: 0
-  }
+
 }
-.login-box{
-  margin:8%  auto;
-  opacity:0.8;
-  background-image: url(./images/banner.png);
+.topnav{
+  width:90%;
+  max-width:1275px;
+  padding-right: 0
+}
+.logincss {
+  margin: 0 auto;
+  width:100%;
+  height: 70%;
+  background-image: url(./images/banner.jpg);
   background-repeat: no-repeat;
   background-position: center;
+
 }
 .home{
   width: 100%;

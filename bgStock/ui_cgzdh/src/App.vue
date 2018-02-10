@@ -1,6 +1,6 @@
 <template>
 
-<div id="app">
+<div id="app" >
 <!--
   <el-row style='float:right'>
     <router-link to="/helper">
@@ -19,9 +19,8 @@
 -->
 
 
-  <div >
     <router-view></router-view>
-  </div>
+---boge---
 </div>
 </template>
 <script>

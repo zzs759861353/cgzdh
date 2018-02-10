@@ -15,7 +15,7 @@
     </el-col>
     <el-col :xs="22" :sm="8" :md="8" :lg="8">
       <el-form-item label="券商" prop="qs">
-        <el-select v-model="loginDto.qs" placeholder="请选择">
+        <el-select v-model="loginDto.qs" placeholder="请选择" style='width:100%'>
       <el-option
         v-for="item in options"
         :key="item.value"
@@ -129,13 +129,14 @@
 
 
       </el-row>
-  <el-row :span='24'>
-<el-form-item>
+      <el-row>
+  <el-col :span='24'>
+
   <el-button style="margin-top: 12px;" type="primary" @click="csh" :disabled='btnSta.csh'>初始化</el-button>
   <el-button style="margin-top: 12px;" type="success" @click="starting" :disabled='btnSta.start'>开始</el-button>
   <el-button style="margin-top: 12px;" type="danger" @click="stopping" :disabled='btnSta.stop'>停止</el-button>
   <el-button style="margin-top: 12px;" type="warning" @click="reSet" :disabled='!btnSta.stop'>重置</el-button>
-</el-form-item>
+
 </el-col>
 
 </el-row>
@@ -269,11 +270,19 @@
             this.jyForm.gpCode=this.jyForm.gpCode.split(',')[0];
             this.init(this.jyForm.gpCode);
           }else{
-            alert("浏览暂不支持localStorage，请更换推荐浏览器运行")
+            this.$message({
+              showClose: true,
+              message: "浏览暂不支持此软件，请更换推荐浏览器运行",
+              type: 'error'
+            });
                }
 
           } else {
-            alert('请补全信息');
+            this.$message({
+              showClose: true,
+              message: "请补全信息",
+              type: 'error'
+            });
             return false;
           }
         })
@@ -281,7 +290,12 @@
      },
      chsFinsh:function(){
        if(!this.ssgp[3]){
-         alert('当前股票存在异常请检查后重试!');return;
+         this.$message({
+           showClose: true,
+           message: '无此股票信息!',
+           type: 'error'
+         });
+         return;
        }
        this.jyForm.kmsl=Math.floor(29999.98/this.ssgp[3]*this.jyForm.jyCount/100)*100;//this.zj[2]/this.ssgp[3]/100*100;
        if(this.active<2){
@@ -321,7 +335,7 @@
       this.loginDto.txPwd=txPwd
     },
     loadZj: function() {
-      return this.$axios.get('/buss/api/v0/gp_query',{params:{
+      return this.$axios.get('/cgzdh/buss/gp_query',{params:{
         clientId:this.clientId,
         user:this.loginDto.user,
               code:104
@@ -329,7 +343,7 @@
       }});
     },
     loadGp: function() {
-      return this.$axios.get('/buss/api/v0/gp_query',{params:{
+      return this.$axios.get('/cgzdh/buss/gp_query',{params:{
         clientId:this.clientId,
         user:this.loginDto.user,
               code:1114
@@ -364,8 +378,11 @@
           sessionStorage.setItem('gplist',_self.gpList);
           }
           })).catch(function(err) {
-          alert('获取账户信息失败，错误信息：' + err);
-
+          _self.$message({
+            showClose: true,
+            message: '获取账户信息失败，错误信息：' + err,
+            type: 'error'
+          });
           });
     },
     hd:function(){
@@ -413,7 +430,7 @@
                    this.setLoginDto('27.223.20.162',7708,'0','','6.64');
                    ;break;
                  };
-                 _self.$axios.post('/buss/api/v0/gp_login',this.loginDto).then((response) => {
+                 _self.$axios.post('/cgzdh/buss/gp_login',this.loginDto).then((response) => {
                                console.log(response);
                                if (!response.data ==0) {
                                  _self.clientId=response.data;
@@ -421,11 +438,21 @@
                                  _self.getZhxx();
 
                }else{
-                 alert('请检查证劵账户是否正确');
+                 _self.$message({
+                   showClose: true,
+                   message: '请检查证劵账户是否正确',
+                   type: 'error'
+                 });
+
                }
                }).catch(function(err) {
                  console.info(err);
-                 alert('获取用户信息失败' + err.response.data.errorMsg);
+                 _self.$message({
+                   showClose: true,
+                   message: err.response.data.errorMsg,
+                   type: 'error'
+                 });
+
                  _self.loadingInstance.close();
                });
                } else {

@@ -36,6 +36,7 @@ const routes = authRouter.routes.concat(homeroute)
 console.info(routes)
 // 创建路由对象
 const router = new Router({
+  mode:'history',
   routes: routes
 })
 
