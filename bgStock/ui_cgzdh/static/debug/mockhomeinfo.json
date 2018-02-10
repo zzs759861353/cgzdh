@@ -1,0 +1,12 @@
+{
+  "businessDTO": {
+    "year": "2017",
+    "month": "05",
+    "day": "11",
+    "week": "星期一",
+    "companyName": "河北东软",
+    "operate": "张三",
+    "numberofinsured": "1",
+    "numberofretirement": "1"
+  }
+}

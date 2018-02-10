@@ -1,0 +1,86 @@
+server:
+  port: 27001
+  contextPath: /auth
+  
+captcha:
+  rendomBackground: false
+  maxFontSize: 32
+  minFontSize: 28
+  maxLength: 4
+  minLength: 4
+  imageWidth: 90
+  imageHeight: 40
+  
+saber:
+  auth:
+    cors:
+      allowed:
+        uris: ^/auth/apps
+        origins: http://localhost:8080$,http://authserver:8080$
+    password:
+      encoder: BCryptPasswordEncoder
+    login:
+        page: http://www.baidu.com
+         
+cors:
+  xhr:
+    allowed:
+      uris: ^/auth/apps
+      origins: http://localhost:8080$,http://authserver:8080$           
+      
+filtered:
+  captcha:
+    sm:
+      uris:  ^/aaa
+    img:
+      valid: false    
+      #uris:  ^/uaa/ws/password,^/uaa/ws/user/person,^/uaa/ws/password,^/uaa/ws/user/byidormobile
+      #uris:  ^/uaa/ws/user/person,^/uaa/ws/user/byidormobile,^/uaa/password/person
+      uris:  ^/aaa
+  buzzcontactor:
+    uris: ^/uaa/ws/user/active        
+ 
+pile:
+  mc:
+    address: http://localhost:8082/pile/message
+  
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.cloud.netflix: INFO 
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379   
+  jpa:
+    hibernate:
+      database: Oracle
+      show-sql: true
+      naming_strategy: org.hibernate.cfg.DefaultNamingStrategy
+  datasource:
+    url: jdbc:oracle:thin:@172.30.3.102:1521:orcl
+    username: DEV_MUJF_HRSS
+    password: 123456
+    driverClassName: oracle.jdbc.driver.OracleDriver  
+ca:
+  configFile: c:\\hebca.properties 
+
+flyway:
+  enabled: false  
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 3
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    # enable these two settings if you want discovery to work
+    registerWithEureka: true
+    fetchRegistry: true  
+    # Default values comes from org.springframework.cloud.netflix.eurek.EurekaClientConfigBean
+    registryFetchIntervalSeconds: 5
+    instanceInfoReplicationIntervalSeconds: 5
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://127.0.0.1:18761/eureka/
+  

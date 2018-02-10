@@ -1,0 +1,62 @@
+server:
+  port: 17002
+  contextPath: /cgzdh 
+logging:
+  level:
+    root: info 
+    org.hibernate: error
+####
+##配置swagger的相关信息
+####
+swagger:
+  title: swagger接口汇总
+  description: BOGE RESTful APIs
+  version: 1.0
+  basepackage: com.cgzdh.buss.controller
+security:
+  basic:
+    enabled: false     
+captcha:
+  rendomBackground: false
+  maxFontSize: 32
+  minFontSize: 28
+  maxLength: 4
+  minLength: 4
+  imageWidth: 90
+  imageHeight: 40
+
+filtered:
+  captcha:
+    sm:
+      uris:  ^/aaa
+    img:
+      valid: false    
+      #uris:  ^/uaa/ws/password,^/uaa/ws/user/person,^/uaa/ws/password,^/uaa/ws/user/byidormobile
+      #uris:  ^/uaa/ws/user/person,^/uaa/ws/user/byidormobile,^/uaa/password/person
+      uris:  ^/aaa
+  buzzcontactor:
+    uris: ^/uaa/ws/user/active        
+  
+spring: 
+   session:
+       store-type: redis
+   datasource:
+       driver-class-name: com.mysql.jdbc.Driver
+       url: jdbc:mysql://127.0.0.1:3306/bgstock
+       username: root
+       password: 123456 
+   redis:
+      host: 172.30.4.19
+      port: 6379
+   jpa:
+      hibernate:
+        database: MySql
+        show-sql: true
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl 
+
+flyway:
+  enabled: false
+
+qr:
+  filePath: D:/

@@ -1,0 +1,85 @@
+.el-input__inner {
+  height: 24px;
+}
+body {
+  background:#e8e9ea !important;
+}
+@media screen and (min-width:992px) and (max-width: 1199px) {
+  #app {
+
+    margin: 0 auto;
+    text-align: center;
+  }
+  #home {
+  margin: 0 auto;
+  margin-bottom:40px;
+  text-align: center;
+}
+
+}
+
+.topnav{
+  width:100%;
+  padding-right: 30px
+}
+@media screen and (max-width:633px) {
+  .xs_font_size{
+    font-size: 1px
+  }
+  .head_logo{
+    height:auto;width:80%
+  }
+  #home {
+
+  margin: 0 auto;
+  margin-bottom:40px;
+  text-align: center;
+}
+
+}
+@media screen and (min-width: 633px) and (max-width:991px ) {
+  #app {
+
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #home {
+  margin: 0 10px;
+  margin-bottom:40px;
+  text-align: center;
+}
+}
+@media screen and (min-width: 1280px) {
+  #app {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  #home {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom:40px;
+  }
+  .topnav{
+    width:1200px;
+    padding-right: 0
+  }
+}
+.login-box{
+  margin:8%  auto;
+  opacity:0.8;
+  background-image: url(./images/banner.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.home{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top:0;
+  left: 0;
+  background:#e8e9ea url(./images/bg.png) repeat-x top center !important;
+  padding-bottom: 48px;
+}

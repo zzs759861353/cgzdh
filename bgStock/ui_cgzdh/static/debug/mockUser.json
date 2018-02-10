@@ -1,0 +1,28 @@
+{
+  "account": "ID-0098722",
+  "name": "九三学社河北省委员会",
+  "email": "test@163.com",
+  "mobile": "13987287621",
+  "associatedCompanys": [{
+    "companyNumber": "139999100026",
+    "name": "九三学社河北省委员会"
+    }],
+  "associatedPersons": [],
+  "roles": [],
+  "apps": [],
+  "userType": "02",
+  "headImgUrl": "",
+  "hasRealNameAuth": false,
+  "organization": {
+    "id":"ID",
+    "orgNumber":"ORGNUMBER",
+    "siOrgNumber":"AAB034",
+    "name":"NAME",
+    "stateCode":"210102",
+    "orgType":"",
+    "address":"",
+    "zip":"",
+    "phone":""
+
+  }
+}

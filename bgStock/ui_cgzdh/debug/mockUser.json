@@ -1,0 +1,28 @@
+{
+  "account": "ID-0098722",
+  "name": "河北东软软件有限公司",
+  "email": "test@163.com",
+  "mobile": "13987287621",
+  "associatedCompanys": [{
+    "companyNumber": "13030193130",
+    "name": "沈阳市水电工程建设总公司"
+    }],
+  "associatedPersons": [],
+  "roles": [],
+  "apps": [],
+  "userType": "02",
+  "headImgUrl": "",
+  "hasRealNameAuth": false,
+  "organization": {
+    "id":"ID",
+    "orgNumber":"ORGNUMBER",
+    "siOrgNumber":"AAB034",
+    "name":"NAME",
+    "stateCode":"210102",
+    "orgType":"",
+    "address":"",
+    "zip":"",
+    "phone":""
+
+  }
+}

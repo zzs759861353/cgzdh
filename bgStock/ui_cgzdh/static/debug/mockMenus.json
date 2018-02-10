@@ -1,0 +1,161 @@
+[
+  {
+    "id": "100",
+    "index": 1,
+    "label": "年度业务",
+    "path": "/basebusi",
+    "children": [
+    	{
+        "children": [],
+        "id": "307",
+        "index": 1,
+        "label": "待遇首发申报",
+        "path": "/employee/treatment/collect"
+      }
+    ]
+  },
+  {
+    "id": "200",
+    "index": 2,
+    "label": "单位业务",
+    "path": "/basebusi",
+    "children": [
+      {
+        "id": "201",
+        "index": 1,
+        "label": "单位信息修改",
+        "path": "/unit/companymodify"
+      }
+    ]
+  },
+  {
+    "id": "300",
+    "index": 3,
+    "label": "个人正常业务",
+    "path": "/basebusi",
+    "children": [
+
+      {
+        "children": [],
+        "id": "601",
+        "index": 1,
+        "label": "人员新参保",
+        "path": "/employee/register"
+      },
+
+      {
+        "children": [],
+        "id": "302",
+        "index": 1,
+        "label": "人员暂停",
+        "path": "/employee/dimission/new/stop"
+      },
+      {
+        "children": [],
+        "id": "303",
+        "index": 1,
+        "label": "人员续保",
+        "path": "/employee/resume"
+      },
+
+      {
+        "children": [],
+        "id": "305",
+        "index": 1,
+        "label": "定期待遇暂停",
+        "path": "/employee/treatment/stop"
+      },
+      {
+        "children": [],
+        "id": "310",
+        "index": 1,
+        "label": "定期待遇恢复",
+        "path": "/employee/treatment/resume"
+      },
+      {
+        "children": [],
+        "id": "308",
+        "index": 1,
+        "label": "在职转退休",
+        "path": "/employee/treatment/retire"
+      },
+      {
+        "children": [],
+        "id": "309",
+        "index": 1,
+        "label": "缴费申报",
+        "path": "feedeclare/ca/qz"
+      }
+
+    ]
+  },
+  {
+    "id": "400",
+    "index": 4,
+    "label": "个人特殊业务",
+    "path": "/basebusi",
+    "children": [
+      {
+        "children": [],
+        "id": "309",
+        "index": 1,
+        "label": "退休人员补登记",
+        "path": "/employee/treatment/registration"
+      },
+      {
+        "children": [],
+        "id": "308",
+        "index": 1,
+        "label": "老办法退休录入",
+        "path": "/employee/treatment/original"
+      },
+      {
+        "children": [],
+        "id": "401",
+        "index": 1,
+        "label": "待遇调整",
+        "path": "/employee/treatchange"
+      }
+
+    ]
+  },
+  {
+    "id": "500",
+    "index": 5,
+    "label": "提交结算",
+    "path": "/basebusi",
+    "children": [
+      {
+        "children": [],
+        "id": "501",
+        "index": 4,
+        "label": "业务提交",
+        "path": "/submit/unifyBusinessSubmit"
+      },
+      {
+        "id": "502",
+        "index": 3,
+        "label": "业务预约",
+        "path": "/book"
+      },
+      {
+        "id": "503",
+        "index": 2,
+        "label": "业务反馈",
+        "path": "/search/review"
+      },
+      {
+        "id": "504",
+        "index": 1,
+        "label": "征集通知单打印",
+        "path": "/unit/companyaudit"
+      },
+      {
+        "id": "505",
+        "index": 1,
+        "label": "支付通知单打印",
+        "path": "/unit/companypayment"
+      }
+    ]
+  }
+]

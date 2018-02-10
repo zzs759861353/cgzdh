@@ -1,0 +1,5 @@
+/target/
+/.apt_generated/
+/node_modules
+/dist
+*.log.*/.idea/
