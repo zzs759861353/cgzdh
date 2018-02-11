@@ -1,6 +1,5 @@
 <template>
 <div id='Welcome'>
-
     <el-row>
       <div v-for="item in items" @click="onSelectMenu(item.url,item.title)">
         <el-col :xs="6" :sm="4" :md="3" :lg="3" :xl="2">

@@ -78,13 +78,18 @@
     <el-button type="danger" @click="login_out">退出登录</el-button>
   <hr />
     <div >
-      <el-steps :active="active" finish-status="success" style='margin:30px 0 30px 24px '>
-          <el-step title="初始化"></el-step>
-          <el-step title="检测"></el-step>
-          <el-step title="开始"></el-step>
-          <el-step title="执行中"></el-step>
-    </el-steps>
+      <el-row style="margin:2% 0 7% 15%">
+        <el-col >
+          <el-steps :active="active" finish-status="success" >
+              <el-step title="初始化" ></el-step>
+              <el-step title="检测" ></el-step>
+              <el-step title="开始" ></el-step>
+              <el-step title="执行中" ></el-step>
+        </el-steps>
+      </el-col>
+    </el-row>
     <el-form :model="jyForm" :rules="rules" ref="jyForm" label-width="120px" inline-message='true' class="demo-userForm">
+
       <el-row >
         <el-col :xs="22" :sm="12" :md="12" :lg="12">  <el-form-item label="股票代码：" prop="gpCode" >
             <el-select  style='width:100%' v-model="jyForm.gpCode"    :disabled='btnSta.csh' placeholder="请选择">

@@ -26,7 +26,7 @@
       },
       selCode(){
         var _self = this;
-        _self.$axios.get('/jykn/findAaa102AndAaa103', {params: {'aaa100': this.aaa100}}).then((response) => {
+        _self.$axios.get('/account/user/account', {id:this.getuserDetail.id,size:20,}).then((response) => {
           console.log(response.data);
           _self.options=response.data;
         }).catch(function(err) {

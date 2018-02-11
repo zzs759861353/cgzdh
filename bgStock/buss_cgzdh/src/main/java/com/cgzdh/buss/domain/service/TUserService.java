@@ -3,9 +3,11 @@ package com.cgzdh.buss.domain.service;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -192,6 +194,9 @@ public class TUserService extends BaseService {
         user.setPassword(encoderService.encryptPassword(user.getPassword()));
         user.setSalt(UUIDTool.getUUID());
         user.setId(UUIDTool.getUUID());
+        Timestamp d = new Timestamp(System.currentTimeMillis()); 
+        user.setCreateTime(d);
+        user.setAmount(d);
         if(null != recomendAgent){
             user.setOrgId(recomendAgent.getId());
             user.setRecomender(recomendAgent.getName());
@@ -214,7 +219,8 @@ public class TUserService extends BaseService {
     public Agent agentRegister(Agent agent){
         agent.setId(UUIDTool.getUUID());
         agent.setAgreementFilePath(agrementFilePath+"/"+agent.getId()+".pdf");
-        
+        Timestamp d = new Timestamp(System.currentTimeMillis());
+        agent.setCreateDate(d);
         return agentRepository.save(agent);
     }
 

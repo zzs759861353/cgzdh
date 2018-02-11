@@ -1,23 +1,32 @@
 <template >
 
-    <el-form :inline="true" :model="companyloginDto" :rules="rules" ref="companyloginDto"  labelPosition='right'>
+    <el-row >
+      <el-col :xs="22" :sm="12" :md="12" :lg="12" class="bj_bai">
+        <p class='tatleP'>登录</p>
+            <el-form :inline="true" :model="companyloginDto" :rules="rules" ref="companyloginDto"  labelPosition='right'>
+              <el-form-item label="" prop="userName" style='margin-top:-16px'>
+                <input name="" type="text"  v-model="companyloginDto.userName" class="kuang_txt" placeholder="账号">
+              </el-form-item>
+              <el-form-item label="" prop="password">
+                <input name="" type="password"  v-model="companyloginDto.password"  class="kuang_txt" placeholder="密码">
+              </el-form-item>
 
-        <el-form-item label="" prop="userName">
-          <el-input v-model="companyloginDto.userName" size='small' placeholder="请输入用户名"></el-input>
-        </el-form-item>
-
-      <el-form-item label="" prop="password">
-        <el-input type="password" size='small' v-model="companyloginDto.password" placeholder="请输入密码"></el-input>
-      </el-form-item>
+              <el-form-item label="" prop="">
+            <input name="登录" type="button" class="btn_zhuce" @click='checkUser' value="登录">            </el-form-item>
 
 
-      <el-form-item >
-      <el-button type="primary" @click='checkUser'>登录</el-button>
-      <el-button type="primary" @click='registerkUser'>注册</el-button>
-      </el-form-item>
+            </el-form>
+        </el-col>
+      <el-col :xs="22" :sm="12" :md="12" :lg="12" class="bj_right">
+          <p>立即注册，加入我们</p>
+            <span @click='registerkUser' class="zhuce_qq">个人注册</span>
+            <span href="#" class="zhuce_wx">代理注册</span>
 
-</el-form>
+              <span href="#">忘记密码？</span>
 
+        </el-col>
+        </el-row>
+  </div>
 </template>
 <script>
 export default {
@@ -138,5 +147,5 @@ if(nowtime>response.data.amount){
 }
 </script>
 <style scoped>
-
+.el-col{border-radius: 0px;}
 </style>

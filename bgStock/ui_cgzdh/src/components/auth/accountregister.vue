@@ -2,59 +2,59 @@
 
 
 <div id='accountregister'>
-  <el-row style="height:100px">
+  <el-row >
     <img src="./images/logo-l.png" style="margin-top:35px"></img>
   </el-row>
   <el-row >
+
   <div class='divcss5'>
+
     <el-card class="box-card">
+
       <div slot="header" class="clearfix">
+
         <div style="margin-bottom:-10px;margin-top:-10px">
           <span style="line-height: 36px;">用户注册</span>
         </div>
       </div>
 
-
-
         <el-form :inline="true" class="demo-ruleForm" :model="unitRegistDto" :rules="rules" ref="unitRegistDto" label-width="80px" labelPosition='right'>
-          <el-row>
-            <el-col >
-          <el-form-item label="帐号" prop="userName">
-            <el-input v-model="unitRegistDto.userName" placeholder="请输入帐号"></el-input>
-          </el-form-item>
-        </el-col>
-              </el-row>
-              <!-- <el-row>
-        <el-col >
-          <el-form-item label="姓名" prop="name">
-            <el-input v-model="unitRegistDto.name" placeholder="请输入姓名"></el-input>
-          </el-form-item>
-        </el-col>
-              </el-row> -->
-              <el-row>
-        <el-col >
-          <el-form-item label="密码" prop="password">
-            <el-input type="password" v-model="unitRegistDto.password" placeholder="请输入密码"></el-input>
-          </el-form-item>
-        </el-col>
-              </el-row>
-              <el-row>
-        <el-col >
-          <el-form-item label="确认密码" prop="confirmpassword">
-            <el-input type="password" v-model="unitRegistDto.confirmpassword" placeholder="请输入确认密码"></el-input>
-          </el-form-item>
-        </el-col>
-              </el-row>
-              <el-row>
-              <el-col >
-                <el-form-item label="" prop="confirmpassword">
-                  <el-button type="primary" @click='addUser'>用户注册</el-button>
-                </el-form-item>
-              </el-col>
-                    </el-row>
-        </el-form>
 
+
+          <el-form-item  prop="userName">
+        <input type="text" v-model="unitRegistDto.userName" class="kuang_txt phone" placeholder="账号">
+          </el-form-item>
+          <el-form-item  prop="name">
+        <input type="text" v-model="unitRegistDto.name" class="kuang_txt names" placeholder="姓名">
+          </el-form-item>
+
+
+              <el-form-item  prop="password">
+                <input name="" type="password" v-model="unitRegistDto.password" class="kuang_txt possword" placeholder="密码">
+
+              </el-form-item>
+
+
+              <el-form-item  prop="confirmpassword">
+                <input name="" type="password" v-model="unitRegistDto.confirmpassword" class="kuang_txt possword" placeholder="确认密码">
+              </el-form-item>
+
+              <el-form-item >
+        <input  type="text" class="kuang_txt yanzm" placeholder="邀请码">
+      </el-form-item>
+
+              <el-form-item >
+                <el-checkbox >
+<span>已阅读并同意<a href="#" target="_blank"><span class="lan">《XXXXX使用协议》</span></a></span>
+                </el-checkbox>
+
+      </el-form-item>
+          <el-form-item >
+        <input name="注册" type="button" @click='addUser' class="btn_zhuce" value="注册">
+      </el-form-item>
+        </el-form>
     </el-card>
+
   </div>
 </el-row>
 </div>
@@ -69,21 +69,10 @@ export default {
     return {
       msg: 'Welcome to Your companyregister.js App',
       unitRegistDto: {
-        id: '',
-        userName: '',
-      	password: '',
-      	account_locked_reason: '',
-      	status: 1,
-      	head_img_url: '',
-      	id_number: '',
-      	id_type: 0,
-      	mobile: '',
-      	org_id: 0,
-      	salt: ''
-      	// update_time: '',
-      	// create_time: '',
-      	// last_active_date: ''
-
+      	userName:'',
+      	name:'',
+      	password:'',
+      	recommendId:''
       },
       rules: {
         userName: [{
@@ -174,7 +163,7 @@ export default {
         fullscreen: true
       });
       _self.loadingInstance.text = '正在注册账户';
-      _self.$axios.put('/cgzdh/auth/tuser', _self.unitRegistDto).then((response) => {
+      _self.$axios.post('/cgzdh/auth/userRegister', _self.unitRegistDto).then((response) => {
         _self.loadingInstance.close();
         _self.$message({
           showClose: true,
@@ -201,9 +190,9 @@ body {
 .divcss5 {
   margin-top: 100px;
   margin: 0 auto;
-  width:360px;
+  width:314px;
 }
-
+.kuang_txt{ width:236px; height:32px; border:1px solid #dddddd; line-height:32px; padding-left:32px; color:#b1a9a9;  margin-bottom:10px; }
 input.el-input__inner {
   margin-top: 5px
 }

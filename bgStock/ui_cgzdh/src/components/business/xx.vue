@@ -1,37 +1,37 @@
 <template>
-  <el-tabs type="border-card"  v-bind:style="styleObject">
-    <el-tab-pane label="账户信息">
-      <el-form  label-width="80px" :model="formLabelAlign">
-        <el-form-item label="帐号">
+
+      <el-form  label-width="80px" :model="formLabelAlign" style='max-width:350px'>
+        <el-form-item label="帐号:">
           <el-input disabled v-model="user.userName"></el-input>
         </el-form-item>
-        <el-form-item label="名称">
+        <el-form-item label="名称:">
           <el-input disabled v-model="user.name"></el-input>
         </el-form-item>
-        <el-form-item label="邀请人">
+        <el-form-item label="邀请人:">
           <el-input disabled v-model="user.recomender"></el-input>
         </el-form-item>
-        <el-form-item label="注册时间">
+        <el-form-item label="注册时间:">
           <el-date-picker
   v-model="user.createTime"
   placeholder="选择日期时间"
   type="datetime"
-  disabled>
+  disabled
+  style='width:100%'>
 </el-date-picker>
         </el-form-item>
-        <el-form-item label="到期时间">
+        <el-form-item label="到期时间:">
           <el-date-picker
           placeholder="选择日期时间"
           v-model="user.amount"
   type="datetime"
   disabled
+  style='width:100%'
   >
 </el-date-picker>
 
         </el-form-item>
       </el-form>
-    </el-tab-pane>
-  </el-tabs>
+
 
 </template>
 <script>

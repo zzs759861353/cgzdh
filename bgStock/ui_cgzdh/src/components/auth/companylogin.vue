@@ -1,17 +1,13 @@
 <template>
 <div id='companylogin' >
-  <el-row style="height:90px;line-height:110px">
-    <img src="././images/logo-l.png" class='head_logo' ></img>
-  </el-row>
-  <el-row class='logincss'>
-    <el-col>
-      <el-tabs type="border-card" class='login-box' v-bind:style="styleObject">
-        <el-tab-pane label="账户登录">
-          <passwordlogin></passwordlogin>
-        </el-tab-pane>
-      </el-tabs>
-    </el-col>
-  </el-row>
+  <div style="height:90px;line-height:110px;text-align:left;">
+    <img src="././images/logo-l.png" class='head_logo' style='margin:5% 0 0 5%'></img>
+  </div>
+<div class='login-box'>
+    <passwordlogin></passwordlogin>
+</div>
+
+
 </div>
 </template>
 <script>
@@ -26,12 +22,7 @@ export default {
   },
   data() {
     return {
-      msg: 'Welcome to Your companylogin.js App',
-      styleObject: {
-        width: '300px',
-        height:"240px"
-
-      }
+      msg: 'Welcome to Your companylogin.js App'
     }
   },
   components: {
@@ -40,11 +31,6 @@ export default {
 }
 </script>
 <style scoped>
-body {
-  text-align: center;
-  background: red !Important;
-}
-
 .bodycss {
   margin-top: 0px;
   margin-right: 0px;
@@ -59,7 +45,6 @@ body {
   margin-top: 100px;
   width: 400px;
 }
-
 input.el-input__inner {
   margin-top: 5px
 }

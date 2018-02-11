@@ -1,15 +1,18 @@
 <template>
     <div>
-  <div  style='text-align:right;margin:0 auto'>
-
     <div >
-      <el-steps :active="active" finish-status="success" >
-          <el-step title="初始化"></el-step>
-          <el-step title="检测"></el-step>
-          <el-step title="开始"></el-step>
-          <el-step title="执行中"></el-step>
-    </el-steps>
+      <el-row style="margin:2% 0 7% 15%">
+        <el-col >
+          <el-steps :active="active" finish-status="success" >
+              <el-step title="初始化" ></el-step>
+              <el-step title="检测" ></el-step>
+              <el-step title="开始" ></el-step>
+              <el-step title="执行中" ></el-step>
+        </el-steps>
+      </el-col>
+    </el-row>
     <el-form :model="jyForm" :rules="rules" ref="jyForm" label-width="120px" inline-message='true' class="demo-userForm">
+
       <el-row >
 
         <el-col :xs="22" :sm="12" :md="12" :lg="12">  <el-form-item label="股票代码：" prop="gpCode" >
@@ -39,7 +42,7 @@
 <el-input v-model="ssgp[3]"  disabled></el-input>
     </el-form-item></el-col>
       </el-row>
-  <el-row >
+  <el-row style="text-align:right">
     <el-col :span='24'>
 
   <el-button style="margin-top: 12px;" type="primary" @click="csh" :disabled='btnSta.csh'>初始化</el-button>
@@ -53,7 +56,6 @@
 
 
       </el-form>
-    </div>
     </div>
       </div>
   </template>
@@ -97,25 +99,13 @@
         ds:0,
        rules:{
          gpCode: [
-           { required: true, message: '请选择股票代码', trigger: 'change' }
+           { required: true, message: '请填写股票代码', trigger: 'blur' }
          ],
          mccl: [
-           { required: true, message: '请选择卖出策略', trigger: 'change' }
+           { required: true, message: '请选择策略', trigger: 'change' }
          ],
          mrcl: [
-           { required: true, message: '请选择买入策略', trigger: 'change' }
-         ]
-
-       },
-       loginDtoRules:{
-         user: [
-           { required: true, message: '请输入券商账户', trigger: 'blur' }
-         ],
-         passwd: [
-           { required: true, message: '请输入券商密码', trigger: 'blur' }
-         ],
-         qs: [
-           { required: true, message: '请选择券商', trigger: 'change' }
+           { required: true, message: '请选择策略', trigger: 'change' }
          ]
 
        }

@@ -2,8 +2,7 @@
 <div id="hrssEnterprisePageHeader">
 <div class="topnav"  style="background:#285890; position:absolute;z-index:899; top:0;  height:30px;">
   <div class="userinfo">
-    <span class="right_span">欢迎您，{{userName}}</span>
-    <el-button type="text" @click="doQuit()" style="color:#fff;font-size:12px;">退出</el-button>
+    <span class="right_span">欢迎您，{{name}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span type="text" style='cursor:pointer' @click="doQuit()">退出</span></span>
   </div>
 </div>
     <div class="head_info_left"> <!--@click="doHome($event)"-->
@@ -16,11 +15,11 @@ export default {
   name: 'hrssEnterprisePageHeader',
   data() {
     return {
-      userName: ''
+      name: ''
     }
   },
   mounted: function () {
-    this.userName = this.getuserDetail().userName;
+    this.name = this.getuserDetail().name;
   },
   methods: {
     onSelectMenu(index) {
@@ -86,9 +85,7 @@ export default {
   overflow:hidden;
   line-height: 14px;
   right:38px;
-  padding-right:12px;
   text-align:right;
-  border-right:1px solid #fafafa;
   position: absolute;
 }
 </style>

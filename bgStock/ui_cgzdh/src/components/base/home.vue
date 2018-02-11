@@ -1,12 +1,14 @@
 <template>
   <div class="home">
-<div id="home">
+
+<div id="home" >
   <div class="topdiv" id="topdiv">
   </div>
+
   <hrss-enterprise-page-header style='height:57px'></hrss-enterprise-page-header>
-  <div style="heigh:auto;width:100%;overflow:auto;overflow-x:hidden; background:#e8e9ea; margin-top:2%;border-radius:12px;">
-  	<div style="width:100%;float:left; background: #fff;   min-height:520px; border-left: 1px solid #ddd; padding:4%;">
-  			<router-view></router-view>
+  <div style="opacity:0.9;heigh:auto;width:100%;overflow:auto;overflow-x:hidden; margin-top:2%;border-radius:12px;">
+    <div style="width:100%;float:left; background: #fff;   min-height:520px; border-left: 1px solid #ddd; padding:4%;">
+        <router-view></router-view>
   	</div>
   </div>
 </div>

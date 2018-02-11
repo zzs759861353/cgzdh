@@ -2,6 +2,7 @@ package com.cgzdh.buss.domain.service;
 
 
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -75,6 +76,7 @@ public class AccountService {
 
 	public  AccountDetail saveAccount(AccountDetail ad) {
 		ad.setId(UUIDTool.getUUID());
+		ad.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		return accountRepository.save(ad);
 		
 	}
