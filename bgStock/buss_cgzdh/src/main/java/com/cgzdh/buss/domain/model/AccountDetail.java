@@ -37,7 +37,7 @@ public class AccountDetail {
     /**
      * 金额
      */
-    @Getter @Setter private String money;
+    @Getter @Setter private Double money;
     /**
      * 创建时间
      */

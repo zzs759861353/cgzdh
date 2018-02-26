@@ -18,6 +18,7 @@ oldroutes = oldroutes.concat(businessRouter.routes);
 // 设置每个路由的name
 oldroutes.forEach((route) => {
   route.name = tocamelCase(route.path);
+
 });
 // 定义home下的路由
 import Home from '@/components/base/Home.vue'

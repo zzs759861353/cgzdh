@@ -14,9 +14,7 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    saveAac002: (state, aac002) => {
-      state.aac002 = aac002;
-    }
+
   },
   actions: {
     actionA({
@@ -31,8 +29,6 @@ export default {
   install(Vue, options) {
     Vue.mixin({
       methods: {
-        setaac002(aac002) {
-          store.commit('saveAac002', aac002);
         }
       }
     })

@@ -4,7 +4,9 @@ package com.cgzdh.buss.domain.service;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -62,18 +64,31 @@ public class AccountService {
 		java.sql.Date now = DateUtil.parseUtilDateToSqlDate(new Date());// 获取系统当前时间作为经办日期
 		String sql="select t.* from t_Account_Detail t where t.org_id =:orgId and DATE_FORMAT(create_time,'%Y%m')= DATE_FORMAT('"+now+"','%Y%m')";
 		Query query=entityManager.createNativeQuery(sql,AccountDetail.class);
-		query.setParameter("orgId", ad.getOrgId());
+		query.setParameter("orgId", ad.getUserId());
 		query.setFirstResult(pageable.getPageNumber()*pageable.getPageSize());
 		query.setMaxResults(pageable.getPageSize());
 		@SuppressWarnings("unchecked")
 		List<AccountDetail> list=query.getResultList();
 		query=entityManager.createNativeQuery("select count(1) from ("+sql+") as ouad");		
-		query.setParameter("orgId", ad.getOrgId());
+		query.setParameter("orgId", ad.getUserId());
 		BigInteger count=(BigInteger)query.getResultList().get(0);
 		Page<AccountDetail> pageList = new PageImpl<AccountDetail>(list, pageable, count.intValue());
 		return pageList;
     }
-
+    public Map<String,Double> getAgentMoney(AccountDto ad){
+		java.sql.Date now = DateUtil.parseUtilDateToSqlDate(new Date());// 获取系统当前时间作为经办日期
+		String sql="select sum(t.money) from t_Account_Detail t where t.org_id =:orgId and DATE_FORMAT(create_time,'%Y%m')= DATE_FORMAT('"+now+"','%Y%m')";
+		Query query=entityManager.createNativeQuery(sql);
+		query.setParameter("orgId", ad.getUserId());
+		Double mje=(Double)query.getResultList().get(0);
+		query=entityManager.createNativeQuery("select sum(t.money) from t_Account_Detail t where t.org_id =:orgId");		
+		query.setParameter("orgId", ad.getUserId());
+		Double zje=(Double)query.getResultList().get(0);
+		Map<String,Double> map=new HashMap<String,Double>();
+		map.put("zje", zje);
+		map.put("mje", mje);
+		return map;
+    }
 	public  AccountDetail saveAccount(AccountDetail ad) {
 		ad.setId(UUIDTool.getUUID());
 		ad.setCreateTime(new Timestamp(System.currentTimeMillis()));

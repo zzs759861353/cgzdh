@@ -6,7 +6,8 @@ export default {
           currentUserSimisItem: 'integrated_wssb_user',
           menuItem: 'integrated_wssb_Menu',
           usermenuItem: 'integrated_wssb_user_Menu',
-          tokenItem: 'gpzdh_user'
+          tokenItem: 'gpzdh_user',
+          broker: 'broker'
         }
       },
       methods: {
@@ -49,6 +50,15 @@ export default {
         },
 
 
+                // 对个人应用列表操作
+                setBroker: function(broker) {
+
+                  window.localStorage.setItem(this.broker, JSON.stringify(broker));
+                },
+                getBroker: function() {
+
+                  return JSON.parse(window.localStorage.getItem(this.broker));
+                },
 
         // 对token操作
         setToken: function(token) {

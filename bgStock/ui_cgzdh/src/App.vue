@@ -20,7 +20,11 @@
 
 
     <router-view></router-view>
----boge---
+    <div style='color:#fffaa0'>
+      Copyright 2017-2027 boge1688.com, All Rights Reserved<br />
+      深圳市搏格教育咨询有限公司  版权所有   粤ICP备17069684号
+    </div>
+
 </div>
 </template>
 <script>

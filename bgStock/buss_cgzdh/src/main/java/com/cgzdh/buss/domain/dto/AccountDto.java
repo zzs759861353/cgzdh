@@ -1,6 +1,5 @@
 package com.cgzdh.buss.domain.dto;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import lombok.Getter;
@@ -21,10 +20,11 @@ public class AccountDto {
     @Getter @Setter private String orgId;
     @Getter @Setter private String userName;
     @Getter @Setter private String name;
+    @Getter @Setter private Long monthCount;
     /**
      * 金额
      */
-    @Getter @Setter private String money;
+    @Getter @Setter private Double money;
     /**
      * 创建时间
      */

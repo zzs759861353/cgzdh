@@ -218,8 +218,9 @@
       var hhv=this.hhv;
       var llv=this.llv;
       var sma=this.sma;
-      var g_if=this.g_if;
+      var g_if=this.g_if;      
       eval(this.jyForm.mccl);
+      console.log(g_if);
         //var mr=eval(this.jyForm.mrcl);
         // var mc=this.jyForm.mccl.split('\|');
         // var flagMc=0;

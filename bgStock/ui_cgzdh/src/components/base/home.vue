@@ -4,9 +4,14 @@
 <div id="home" >
   <div class="topdiv" id="topdiv">
   </div>
-
   <hrss-enterprise-page-header style='height:57px'></hrss-enterprise-page-header>
   <div style="opacity:0.9;heigh:auto;width:100%;overflow:auto;overflow-x:hidden; margin-top:2%;border-radius:12px;">
+<div style='width:100%;height:39px;background-color:#fff;padding:9px 16px 0 16px;'>
+    <el-breadcrumb style='height:26px;background-color:#f5f5f5; line-height:26px;text-align:center'>
+    <el-breadcrumb-item  style='margin-left:8px' ><span @click="onSelectMenu('sy')">首页</span></el-breadcrumb-item>
+    <el-breadcrumb-item >{{breads}}</el-breadcrumb-item>
+    </el-breadcrumb>
+</div>
     <div style="width:100%;float:left; background: #fff;   min-height:520px; border-left: 1px solid #ddd; padding:4%;">
         <router-view></router-view>
   	</div>
@@ -45,6 +50,7 @@ export default {
       styleObject: {
         height: '200px'
       },
+      breads:'',
       activeMenu: '',
       defaultProps: {
         children: 'children',
@@ -59,8 +65,8 @@ export default {
   methods: {
     onSelectMenu: function(code) {
       switch (code){
-        case 'sy':this.breadcrumbitem = this.sy;this.$router.push('/base/welcome/');break;
-        default:this.breadcrumbitem = code;
+        case 'sy':this.breads ='';this.$router.push('/base/welcome/');break;
+        default:this.breads = code[0].name;
           this.$router.push(code[0].url);
       }
     }

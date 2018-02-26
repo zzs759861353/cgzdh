@@ -42,10 +42,10 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.cgzdh.buss.domain.dto.AccountDto;
 import com.cgzdh.buss.domain.dto.TUserDto;
-import com.cgzdh.buss.domain.model.Agent;
+import com.cgzdh.buss.domain.model.AccountDetail;
 import com.cgzdh.buss.domain.model.TUser;
-import com.cgzdh.buss.domain.repository.AgentRepository;
 import com.cgzdh.buss.domain.repository.TUserRepository;
 import com.cgzdh.buss.exception.BusinessException;
 import com.cgzdh.buss.exception.DbException;
@@ -61,7 +61,7 @@ public class TUserService extends BaseService {
 	@Autowired
 	private TUserRepository tUserRepository;
 	@Autowired
-	private AgentRepository agentRepository;
+	private AccountService accountService;
 	@Autowired
 	BCryptPasswordEncoderService encoderService;
 	@Autowired
@@ -99,25 +99,6 @@ public class TUserService extends BaseService {
 
 	public void deleteTUser(String id) {
 		tUserRepository.delete(id);
-	}
-
-
-	public TUserDto createTUser(TUserDto tUserDto) {
-		TUser tuser = dozerUtil.map(tUserDto, TUser.class);
-		if (tuser.getUserName().equals(tuser.getUserName())) { // 需要从协同平台提取数据
-			
-		}
-		tuser.setSalt("e407ee90210cd677410b48649583b515");
-		tuser.setPassword(encoderService.encryptPassword(tuser.getPassword()));
-		TUser savedTUser = new TUser();
-		try {
-			savedTUser = tUserRepository.save(tuser);
-		} catch (Exception e) {
-			throw new BusinessException("保存数据失败");
-		}
-
-		return dozerUtil.map(savedTUser, TUserDto.class);
-
 	}
 
 	public OAuth2AccessToken checkAccount(TUserDto tUserDto) {
@@ -183,25 +164,17 @@ public class TUserService extends BaseService {
      * @param userVo
      */
     public TUser userRegister(TUserDto userVo){
-    	Agent recomendAgent = null;
     	TUser recomendUser = null;
-        if(!StringUtils.isEmpty(userVo.getRecommendId())){
-            recomendAgent = agentRepository.findOne(userVo.getRecommendId());
+        if(!StringUtils.isEmpty(userVo.getRecommendId())){          
             recomendUser = tUserRepository.findOne(userVo.getRecommendId());
         }
         TUser user = new TUser();
         BeanUtils.copyProperties(userVo, user);
         user.setPassword(encoderService.encryptPassword(user.getPassword()));
-        user.setSalt(UUIDTool.getUUID());
         user.setId(UUIDTool.getUUID());
         Timestamp d = new Timestamp(System.currentTimeMillis()); 
         user.setCreateTime(d);
         user.setAmount(d);
-        if(null != recomendAgent){
-            user.setOrgId(recomendAgent.getId());
-            user.setRecomender(recomendAgent.getName());
-            //userMapper.delayPeriod(BigDecimal.valueOf(100),1,recomendUser.getId());
-        }
         if(null != recomendUser){
         	user.setOrgId(recomendUser.getId());
         	user.setRecomender(recomendUser.getName());
@@ -209,19 +182,6 @@ public class TUserService extends BaseService {
         }
         //user.setAmountActive(BigDecimal.valueOf(3));
        return tUserRepository.save(user);
-    }
-
-    /**
-     * 机构代理商注册
-     * 设置该用户免费试用天数与推荐着免费试用天数
-     * @param userVo
-     */
-    public Agent agentRegister(Agent agent){
-        agent.setId(UUIDTool.getUUID());
-        agent.setAgreementFilePath(agrementFilePath+"/"+agent.getId()+".pdf");
-        Timestamp d = new Timestamp(System.currentTimeMillis());
-        agent.setCreateDate(d);
-        return agentRepository.save(agent);
     }
 
     //验证码获取
@@ -254,4 +214,24 @@ public class TUserService extends BaseService {
 
         return randCOde;
     }
+
+
+	public TUser userPay(AccountDto accountDto) {
+        AccountDetail ad = new AccountDetail();
+        BeanUtils.copyProperties(accountDto, ad);
+        ad.setId(UUIDTool.getUUID());
+        accountService.saveAccount(ad);
+        TUser user=new TUser();
+        BeanUtils.copyProperties(findByAccount(accountDto.getUserName()),user);
+        if(user.getAmount().getTime()>new Date().getTime()){
+        	user.setAmount(new Timestamp(user.getAmount().getTime()+accountDto.getMonthCount()*30*24*3600000));
+        	user=tUserRepository.save(user);
+        }else{
+        	user.setAmount(new Timestamp(new Date().getTime()+accountDto.getMonthCount()*30*24*3600000));
+        	user=tUserRepository.save(user);
+        }
+        return user;
+        
+		
+	}
 }

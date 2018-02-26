@@ -31,5 +31,5 @@ public class TUserDto implements Serializable {
 	private Timestamp amount;
 	private String recomender;
 	private String recommendId;
-
+	private int userType;
 }

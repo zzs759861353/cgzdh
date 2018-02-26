@@ -1,5 +1,7 @@
 package com.cgzdh.buss.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -17,13 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.cgzdh.buss.domain.dto.AccountDto;
 import com.cgzdh.buss.domain.dto.TUserDto;
-import com.cgzdh.buss.domain.model.Agent;
 import com.cgzdh.buss.domain.model.TUser;
 import com.cgzdh.buss.domain.service.TUserService;
 import com.cgzdh.buss.exception.DbException;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -44,23 +44,21 @@ public class TUserController{
 	public @ResponseBody OAuth2AccessToken checkAccount( @RequestBody TUserDto tUserDto) {
 		return tUserService.checkAccount( tUserDto);
 	}
-
+	@RequestMapping(value = "/tuser/pay", method = RequestMethod.POST)
+	public @ResponseBody TUser userPay( @RequestBody AccountDto accountDto) {
+		new AliPayController().pay_req(accountDto);
+		return tUserService.userPay( accountDto);
+	}
+	@RequestMapping(value = "/getTime", method = RequestMethod.GET)
+	public @ResponseBody Long getTime() {
+		return new Date().getTime();
+	}
 	@RequestMapping(value = "/tuser/{userName}", method = RequestMethod.GET)
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "userName", value = "人员账户", required = true, paramType = "path", dataType = "String", defaultValue = "") })
 	@ApiOperation(value = "根据账户查询人员信息")
 	public @ResponseBody TUserDto getTUser(@PathVariable("userName") String userName) {
 		return tUserService.findByAccount(userName);
-	}
-
-	@RequestMapping(value = "/tuser", method = RequestMethod.PUT)
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "tUserDto", value = "账户信息", required = true, paramType = "body", dataType = "TUserDto") })
-	@ApiOperation(value = "系统内新增用户")
-	public @ResponseBody TUserDto createTUser(@RequestBody TUserDto tUserDto) {
-
-		return tUserService.createTUser(tUserDto);
-
 	}
 
 	@RequestMapping(value = "/tuser/{id}", method = RequestMethod.DELETE)
@@ -88,18 +86,6 @@ public class TUserController{
     public @ResponseBody TUser userRegister(@RequestBody TUserDto user){
         return tUserService.userRegister(user);
     }
-    /***
-     * 代理商注册接口
-     * @param userVo
-     * @return
-     */
-    @ApiOperation(value="用户注册接口", notes="用户注册接口")
-    @ApiImplicitParam(name = "userVo",   dataType = "UserVo")
-    @RequestMapping(value = "/agentRegister",method = RequestMethod.POST)
-    public @ResponseBody Agent agentRegister(@RequestBody Agent agent){    	
-    	return tUserService.agentRegister(agent);
-    }
-
 //    /***
 //     * 获取用户信息
 //     * @return

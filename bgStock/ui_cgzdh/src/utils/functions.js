@@ -9,6 +9,15 @@ export default {
           yesterday:'',
           scs:[],
           dpzs:[],
+          jyxx:{
+            clientId:'',
+      			type:0,
+      			user:'',
+      			gdCode:'',
+      			gpCode:'',
+      			count:0,
+      			price:0
+          },
           sfsc:0,
           jcjg:0,
           jcs:[],
@@ -79,9 +88,7 @@ export default {
             }else{
               this.jcs=[this.jcs[this.jcs.length-2]];
             }
-              console.log('mr'+this.ssgp[3]);
-              this.g_status=2;
-              this.stopping();
+              this.jy(0)
               return;
             }
           }
@@ -91,9 +98,7 @@ export default {
               }else{
                 this.jcs=[this.jcs[this.jcs.length-2]];
               }
-              console.log('mr'+this.ssgp[3]);
-              this.g_status=2;
-              this.stopping();
+              this.jy(0)
               return;
             }
           }
@@ -111,9 +116,7 @@ export default {
                 if(this.jcs.length==2){
                   if((this.jcjg-this.ssgp[3])/this.jcjg>0.01){
                     this.jcs=[{zs:this.dpzs[1],jg:this.ssgp[3]}];
-                    console.log('mr'+this.ssgp[3]);
-                    this.g_status=2;
-                    this.stopping();
+                    this.jy(0)
                   }
                 }else if(this.jcs.length>3){
                   //yn+2<yn
@@ -123,9 +126,7 @@ export default {
                         if(this.jcs.length%2==0){
                           if((this.jcjg-this.ssgp[3])/this.jcjg>0.003){
                             this.jcs=[{zs:this.dpzs[1],jg:this.ssgp[3]}];
-                          console.log('mr'+this.ssgp[3]);
-                            this.g_status=2;
-                            this.stopping();
+                            this.jy(0)
                           }
                         }
                     //yn+2>yn
@@ -134,9 +135,7 @@ export default {
                     if(this.jcs.length==4){
                       if((this.jcjg-this.ssgp[3])/this.jcjg>0.01){
                         this.jcs=[{zs:this.dpzs[1],jg:this.ssgp[3]}];
-                        console.log('mr'+this.ssgp[3]);
-                        this.g_status=2;
-                        this.stopping();
+                        this.jy(0)
                       }
                       //判断yn+4
                     }else if(this.jcs.length>=5){
@@ -147,9 +146,7 @@ export default {
                           if(this.jcs.length%2==0){
                             if((this.jcjg-this.ssgp[3])/this.jcjg>0.003){
                               this.jcs=[{zs:this.dpzs[1],jg:this.ssgp[3]}];
-                              console.log('mr'+this.ssgp[3]);
-                              this.g_status=2;
-                              this.stopping();
+                              this.jy(0)
                             }
                           }
                         }
@@ -161,6 +158,11 @@ export default {
                 }
             }
         },
+        goLogin:function(){
+          this.$router.push({
+            path: '/login'
+          });
+        },
         sc:function(){
           var C=this.C;
           var ma=this.ma;
@@ -170,35 +172,108 @@ export default {
           var llv=this.llv;
           var sma=this.sma;
           var g_if=this.g_if;
-          if((this.gpXqList[0][6]-this.gpXqList[0][5])/this.gpXqList[0][2]){
-
-          };
-          if(this.sfgp.length<8||this.sfgp.length==this.sfsc){
-            return;
-          }
-          var scResult=this.cross(function(i){return sma(function(i){return sma(function(i){return (C(i)-llv(function (i){return C(i)},4,i))/(hhv(function (i){return C(i)},4,i)-llv(function (i){return C(i)},4,i))*100},2,1,i)},2,1,i)},function(i){return 3*(sma(function(i){return (C(i)-llv(function (i){return C(i)},4,i))/(hhv(function (i){return C(i)},4,i)-llv(function (i){return C(i)},4,i))*100},2,1,i))-2*(sma(function(i){return sma(function(i){return (C(i)-llv(function (i){return C(i)},4,i))/(hhv(function (i){return C(i)},4,i)-llv(function (i){return C(i)},4,i))*100},2,1,i)},2,1,i))});
-          if(scResult==1){
-            this.sfsc=this.sfgp.length;
-            if(this.scs.length==0){
-              this.scs.push({zs:this.dpzs[1],jg:this.ssgp[3]})
-            }else{
-              this.scs.push({zs:this.dpzs[1],jg:this.ssgp[3]})
-              if(this.dpzs[1]>this.scs[this.scs.length-2].zs){
-                this.scs=[];
-                console.log('mc'+this.ssgp[3]);
-                this.jcjg=this.ssgp[3];
-                this.g_status=1;
-                this.jcs.push({zs:this.dpzs[1],jg:this.ssgp[3]});
+          // if((this.gpXqList[0][6]-this.gpXqList[0][5])/this.gpXqList[0][2]){
+          //
+          // };
+          if(this.sfgp.length>=8&&this.sfgp.length!=this.sfsc){
+            var scResult=this.cross(function(i){return sma(function(i){return sma(function(i){return (C(i)-llv(function (i){return C(i)},4,i))/(hhv(function (i){return C(i)},4,i)-llv(function (i){return C(i)},4,i))*100},2,1,i)},2,1,i)},function(i){return 3*(sma(function(i){return (C(i)-llv(function (i){return C(i)},4,i))/(hhv(function (i){return C(i)},4,i)-llv(function (i){return C(i)},4,i))*100},2,1,i))-2*(sma(function(i){return sma(function(i){return (C(i)-llv(function (i){return C(i)},4,i))/(hhv(function (i){return C(i)},4,i)-llv(function (i){return C(i)},4,i))*100},2,1,i)},2,1,i))});
+            if(scResult==1){
+              this.sfsc=this.sfgp.length;
+              if(this.scs.length==0){
+                this.scs.push({zs:this.dpzs[1],jg:this.ssgp[3]})
+              }else{
+                this.scs.push({zs:this.dpzs[1],jg:this.ssgp[3]})
+                if(this.dpzs[1]>this.scs[this.scs.length-2].zs){
+                  this.jy(1)
+                }
               }
             }
           }
+
+
         },
         blcl:function(){
           if(this.jcjg==0){
 
             this.sc();
           }else{
-            this.jc();
+            if(this.time_range('14:50','14:55')){
+              this.jy(0);
+            }else{
+              this.jc();
+            }
+
+          }
+
+
+        },
+        jyResult:function(type){
+          if(type==0){//in
+            this.jcs.splice(1,this.jcs.length-1);
+            this.g_status=2;
+            this.stopping();
+          }else{
+            this.scs=[];
+            console.log('mc'+this.ssgp[3]);
+            this.jcjg=this.ssgp[3];
+            this.g_status=1;
+            this.jcs.push({zs:this.dpzs[1],jg:this.ssgp[3]});
+          }
+        },
+        jy:function(type){
+          var _self=this;
+          this.jyxx.type=type;
+          if(type==0){//in
+            this.jyxx.price= Math.ceil((parseFloat(this.ssgp[3])+this.ssgp[3]*0.0005)*100)/100;
+            this.$axios.get('/cgzdh/buss/gp_query',{params:{
+              clientId:this.clientId,
+              user:this.loginDto.user,
+                    code:104
+            }}).then((zjResponse) => {
+              var kyzj = zjResponse.data.substring(zjResponse.data.indexOf('保留信息|')+5,zjResponse.data.length-1).split('\|')[2];
+              var jssl=Math.floor(kyzj/this.jyxx.price/100)*100;
+              if(jssl<_self.jyxx.count){
+                _self.jyxx.count=jssl;
+              }
+              console.log(this.jyxx)
+              _self.$axios.get('/cgzdh/buss/gp_deal',{params:this.jyxx}).then((response) => {
+                            console.log(response);
+                              _self.jyResult(type);
+            }).catch(function(err) {
+              console.info(err);
+              _self.$message({
+                showClose: true,
+                message: err.response.data.errorMsg,
+                type: 'error'
+              });
+            })
+
+          }).catch(function(err) {
+            console.info(err);
+            _self.$message({
+              showClose: true,
+              message: err.response.data.errorMsg,
+              type: 'error'
+            });
+          });
+
+          }else{
+            this.jyxx.price=Math.floor((parseFloat(his.ssgp[3])-this.ssgp[3]*0.0005)*100)/100;
+            console.log(this.jyxx)
+            _self.$axios.get('/cgzdh/buss/gp_deal',{params:this.jyxx}).then((response) => {
+
+                          console.log(response);
+                            _self.jyResult(type);
+
+
+          }).catch(function(err) {
+            console.info(err);
+            _self.$message({
+              showClose: true,
+              message: err.response.data.errorMsg,
+              type: 'error'
+            });
+          })
           }
 
 
@@ -209,9 +284,9 @@ export default {
           this.today=now.getFullYear()+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+(now.getDate()<10?"0":"")+now.getDate();
           this.lastMonthDay=this.getLastMonthYestdy(now);
           var self=this;
-               self.$axios.get('/hisHq?code=cn_'+gpCode+'&start='+this.lastMonthDay+'&end='+this.yesterday+'&stat=1&order=D&period=d&callback=historySearchHandler&rt=json').then((response) => {
-
-         self.gpXqList=response.data[0].hq;
+         //       self.$axios.get('/hisHq?code=cn_'+gpCode+'&start='+this.lastMonthDay+'&end='+this.yesterday+'&stat=1&order=D&period=d&callback=historySearchHandler&rt=json').then((response) => {
+         //
+         // self.gpXqList=response.data[0].hq;
          var g='';
          if(gpCode.substr(0,1)==6){
            g='sh'+gpCode;
@@ -227,13 +302,13 @@ export default {
 
 
              });
-               }).catch(function(err) {
-
-                 console.info(err);
-                 alert('获取股票信息失败' + err.response.data.errorMsg);
-                 return false;
-
-               });
+               // }).catch(function(err) {
+               //
+               //   console.info(err);
+               //   alert('获取股票信息失败' + err.response.data.errorMsg);
+               //   return false;
+               //
+               // });
         },
         formatDuring:  function (mss) {
     var days = parseInt(mss / (1000 * 60 * 60 * 24));
@@ -277,7 +352,44 @@ export default {
     }
     return strYear+""+strMonth+""+strDay;
   } ,
-
+  getSmpFormatDates:function(date, isFull) {
+  var pattern = "";
+  if (isFull == true || isFull == undefined) {
+  pattern = "yyyy-MM-dd hh:mm:ss";
+  } else {
+  pattern = "yyyy-MM-dd";
+  }
+  return this.getFormatDates(date, pattern);
+},
+formats:function (date,format) {
+  var o = {
+ "M+": date.getMonth() + 1,
+  "d+": date.getDate(),
+ "h+": date.getHours(),
+ "m+": date.getMinutes(),
+ "s+": date.getSeconds(),
+ "q+": Math.floor((date.getMonth() + 3) / 3),
+ "S": date.getMilliseconds()
+ }
+ if (/(y+)/.test(format)) {
+ format = format.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+ }
+ for (var k in o) {
+ if (new RegExp("(" + k + ")").test(format)) {
+ format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+ }
+ }
+ return format;
+ },
+getFormatDates:function(date, pattern) {
+if (date == undefined) {
+ date = new Date();
+ }
+ if (pattern == undefined) {
+ pattern = "yyyy-MM-dd hh:mm:ss";
+ }
+ return this.formats(date,pattern);
+},
   //获得上个月在昨天这一天的日期
 getLastMonthYestdy:  function (date){
      var daysInMonth = new Array([0],[31],[28],[31],[30],[31],[30],[31],[31],[30],[31],[30],[31]);
@@ -628,29 +740,26 @@ getLastMonthYestdy:  function (date){
                   }
                     } ,
         auto:function(){
-          if(this.time_range('09:29','11:30')&&this.time_range('12:59','15:00')){
-
+          if(this.time_range('09:29','11:30')||this.time_range('12:59','15:00')){
             var self=this;
             var g='';
             var dp='';
-            if(this.jyForm.gpCode.substr(0,1)==6){
-              g='sh'+this.jyForm.gpCode;
+            if(this.jyxx.gpCode.substr(0,1)==6){
+              g='sh'+this.jyxx.gpCode;
               dp='s_sh000001'
             }else{
-                g='sz'+this.jyForm.gpCode;
+                g='sz'+this.jyxx.gpCode;
                 dp='s_sz399001'
             }
   // var hq_str_s_sh000001="上证指数,3094.668,-128.073,-3.97,436653,5458126";
   // 数据含义分别为：指数名称，当前点数，当前价格，涨跌率，成交量（手），成交额（万元）；
-
-                // self.$axios.get('/flashdata/hushen/minute/'+g+'.js').then((response) => {
-                //   self.sfgp=response.data.split("\\n\\").reverse();
+                self.$axios.get('/flashdata/hushen/minute/'+g+'.js').then((response) => {
+                  self.sfgp=response.data.split("\\n\\").reverse();
                   self.$axios.get('/list='+g).then((response) => {
                     self.ssgp=response.data.substr(response.data.indexOf('\"')+1,response.data.length).split(",");
-                    if(self.ssgp[self.ssgp.length-2].substr(6)<5){
-                      self.sfgp.push(self.ssgp[self.ssgp.length-2]+' '+self.ssgp[3])
-                    };
-                    console.log(self.sfgp)
+                    // if(self.ssgp[self.ssgp.length-2].substr(6)<5){
+                    //   self.sfgp.push(self.ssgp[self.ssgp.length-2]+' '+self.ssgp[3])
+                    // };
                     self.$axios.get('/list='+dp).then((response) => {
                       self.dpzs=response.data.substr(response.data.indexOf('\"')+1,response.data.length).split(",");
 
@@ -663,10 +772,10 @@ getLastMonthYestdy:  function (date){
 
                   });
 
-                // }).catch(function(err) {
-                //
-                //
-                // });
+                }).catch(function(err) {
+
+
+                });
           }
 
         }

@@ -40,17 +40,26 @@ export default {
   },
   methods: {
     onSelectMenu: function(url, name) {
-
+var _self=this;
       if(url=='/business/auto'){
-
-        var nowtime=new Date().getTime();
-if(nowtime>this.getuserDetail().amount){
-  this.$message({
-         message: '会员已到期，该功能无法使用，请续费！',
-         type: 'warning'
-       });
-                return;
+_self.$axios.get('/cgzdh/auth/getTime').then((res) => {
+  var nowtime=res.data;
+if(nowtime>_self.getuserDetail().amount){
+_self.$message({
+   message: '会员已到期，该功能无法使用，请续费！',
+   type: 'warning'
+ });
+          return;
 }
+
+}).catch(function(err) {
+  _self.$message({
+    showClose: true,
+    message: '获取时间失败',
+    type: 'error'
+  });
+});
+
       }
       this.$root.eventHub.$emit('we_select_menu', [{'name': name, 'url': url}]);
       //this.$router.push(url);

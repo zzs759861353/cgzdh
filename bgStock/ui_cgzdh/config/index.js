@@ -52,16 +52,24 @@ module.exports = {
           '^/hisHq': '/hisHq'
         },
         secure: false
-      }
+      },
+      '/gateway': {
+        target: 'https://mapi.alipay.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/gateway': '/gateway'
+        },
+        secure: false
+      },
       //分钟
-      // '/flashdata': {
-      //   target: '  http://data.gtimg.cn',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/flashdata': '/flashdata'
-      //   },
-      //   secure: false
-      // }
+      '/flashdata': {
+        target: '  http://data.gtimg.cn',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/flashdata': '/flashdata'
+        },
+        secure: false
+      }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

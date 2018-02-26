@@ -1,5 +1,6 @@
 spring:
   profiles:
     active: dev
+    include: alipay
 service:
   winic: http://service.winic.org:8009/sys_port/gateway/index.asp?id=wendaone&pwd=115675Abo&to={phone}&time={time}&content={content}

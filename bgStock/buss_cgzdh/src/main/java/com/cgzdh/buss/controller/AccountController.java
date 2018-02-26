@@ -1,6 +1,8 @@
 package com.cgzdh.buss.controller;
 
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -71,6 +73,20 @@ public class AccountController {
     public @ResponseBody Page<AccountDetail> getAgentAccount(@RequestBody AccountDto ad ){
          
         return accountService.getAgentAccount(ad);
+    }
+    /**
+     * 获取机构中的会员充值记录
+     * @param pageSize 分页大小
+     * @param pageNum 分页页码
+     * @param agentId 机构编号
+     * @param month 年月 YYYY-MM
+     * @return
+     */
+    @ApiOperation(value="获取机构中的会员充值记录", notes="获取机构中的会员充值记录")
+    @RequestMapping(value = "/agent/money",method = RequestMethod.POST)
+    public @ResponseBody Map<String,Double> getAgentMoney(@RequestBody AccountDto ad ){
+    	
+    	return accountService.getAgentMoney(ad);
     }
 
 }

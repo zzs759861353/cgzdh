@@ -10,15 +10,6 @@
         <el-form-item label="邀请人:">
           <el-input disabled v-model="user.recomender"></el-input>
         </el-form-item>
-        <el-form-item label="注册时间:">
-          <el-date-picker
-  v-model="user.createTime"
-  placeholder="选择日期时间"
-  type="datetime"
-  disabled
-  style='width:100%'>
-</el-date-picker>
-        </el-form-item>
         <el-form-item label="到期时间:">
           <el-date-picker
           placeholder="选择日期时间"
@@ -30,6 +21,16 @@
 </el-date-picker>
 
         </el-form-item>
+        <el-form-item label="注册时间:">
+          <el-date-picker
+  v-model="user.createTime"
+  placeholder="选择日期时间"
+  type="datetime"
+  disabled
+  style='width:100%'>
+</el-date-picker>
+        </el-form-item>
+
       </el-form>
 
 

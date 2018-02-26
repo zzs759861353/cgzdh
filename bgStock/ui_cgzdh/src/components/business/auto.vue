@@ -18,9 +18,9 @@
         <el-select v-model="loginDto.qs" placeholder="请选择" style='width:100%'>
       <el-option
         v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
+        :key="item.id"
+        :label="item.name"
+        :value="item.id">
       </el-option>
     </el-select>
       </el-form-item>
@@ -74,7 +74,7 @@
 
 </el-row>
 
-
+<el-button type="danger" @click="jy">mai</el-button>
     <el-button type="danger" @click="login_out">退出登录</el-button>
   <hr />
     <div >
@@ -97,7 +97,8 @@
       v-for="item in gpList"
       :key="item[9]"
       :label="item[1]"
-      :value="item[0]+','+item[9]">
+      :value="item[0]+','+item[9]+','+item[3]"
+      :disabled="item[3]==0">
     </el-option>
   </el-select>
       </el-form-item></el-col>
@@ -156,9 +157,10 @@
 
   export default {
     mounted: function () {
+      this.options=this.getBroker(),
       this.options3[0].options=this.yhcls,
       this.options3[1].options=this.xtcls,
-      this.gpList=sessionStorage.getItem('gplist').split(','),
+      this.gpList=!sessionStorage.getItem('gplist')?[]:sessionStorage.getItem('gplist').split(','),
       this.zj=sessionStorage.getItem('selfzj').split(',')
   },
    data() {
@@ -171,7 +173,6 @@
          gpCode:'',
          mccl: '',
          mrcl: '',
-         gddm:'',
          jyCount:'',
          kmsl:0
 
@@ -187,8 +188,8 @@
        loginDto:{
         ip :'',   //服务器IP地址
         port:'',            //端口
-        user:'',  //账户
-        passwd:'',      //密码
+        user:'895500003337',  //账户
+        passwd:'321456',      //密码
         txPwd :'',             //通讯密码
         yyb :'',              //营业部
         version:'' ,      //版本号
@@ -200,12 +201,9 @@
         stop:true
       },
       gpList: [],
-
+loadingInstance: {},
       zj:[],
-      options: [{
-          value: '东莞证券',
-          label: '东莞证券'
-        }],
+      options: [],
         active:0,
         ds:0,
        clientId:sessionStorage.getItem('clientId'),
@@ -271,8 +269,12 @@
             if(this.active<1){
                 this.active++;
             }
-            this.jyForm.gddm=this.jyForm.gpCode.split(',')[1];
-            this.jyForm.gpCode=this.jyForm.gpCode.split(',')[0];
+            this.jyxx.gdCode=this.jyForm.gpCode.split(',')[1];
+            //this.jyForm.gpCode=this.jyForm.gpCode.split(',')[0];
+            this.jyxx.count=this.jyForm.gpCode.split(',')[2];
+            this.jyxx.gpCode=this.jyForm.gpCode.split(',')[0];
+            this.jyxx.clientId=this.clientId;
+            this.jyxx.user=this.loginDto.user;
             this.init(this.jyForm.gpCode);
           }else{
             this.$message({
@@ -302,7 +304,7 @@
          });
          return;
        }
-       this.jyForm.kmsl=Math.floor(29999.98/this.ssgp[3]*this.jyForm.jyCount/100)*100;//this.zj[2]/this.ssgp[3]/100*100;
+       this.jyForm.kmsl=this.jyxx.count;//this.zj[2]/this.ssgp[3]/100*100;
        if(this.active<2){
            this.active++;
        }
@@ -369,16 +371,17 @@
           sessionStorage.setItem('selfzj',sss);
           _self.zj=sss;
           var ss = gpResponse.data.substring(gpResponse.data.indexOf('保留信息|')+5,gpResponse.data.length-1).split('\|');
-          if(ss.length==1&&_self.gpList.length==0){
+          if(ss.length!=1&&_self.gpList.length==0){
           // _self.gpList.push(
           // [
           // "","","","","","","","","","","","","","",""
           // ]
           // )
-          }else{
+
           for(var i=0;i<ss.length;i+=15){
 
           _self.gpList.push(ss.slice(i,i+15));
+          console.log(_self.gpList)
           }
           sessionStorage.setItem('gplist',_self.gpList);
           }
@@ -430,14 +433,17 @@
       this.$refs['loginDto'].validate((valid) => {
                if (valid) {
                  var _self=this;
-                 switch(this.loginDto.qs){
-                   case '东莞证券':
-                   this.setLoginDto('27.223.20.162',7708,'0','','6.64');
-                   ;break;
-                 };
+                 var broker=this.options[this.loginDto.qs-1];
+
+                   this.setLoginDto(broker.ip,broker.port,broker.yyb,'',broker.version);
+console.log(this.loginDto)
+                 _self.loadingInstance = _self.$loading({
+                   fullscreen: true
+                 });
+                   _self.loadingInstance.text = '正在加载证券信息，请稍等！';
                  _self.$axios.post('/cgzdh/buss/gp_login',this.loginDto).then((response) => {
                                console.log(response);
-                               if (!response.data ==0) {
+                               if (response.data !=0) {
                                  _self.clientId=response.data;
                                  sessionStorage.setItem('clientId',response.data);
                                  _self.getZhxx();
@@ -450,6 +456,7 @@
                  });
 
                }
+               _self.loadingInstance.close();
                }).catch(function(err) {
                  console.info(err);
                  _self.$message({

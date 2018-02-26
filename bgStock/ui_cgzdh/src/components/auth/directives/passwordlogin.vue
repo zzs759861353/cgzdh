@@ -20,7 +20,7 @@
       <el-col :xs="22" :sm="12" :md="12" :lg="12" class="bj_right">
           <p>立即注册，加入我们</p>
             <span @click='registerkUser' class="zhuce_qq">个人注册</span>
-            <span href="#" class="zhuce_wx">代理注册</span>
+            <span @click="agentRegister" class="zhuce_wx">代理注册</span>
 
               <span href="#">忘记密码？</span>
 
@@ -59,6 +59,11 @@ export default {
     }
   },
   methods: {
+    agentRegister:function(){
+      this.$router.push({
+        name: 'agentRegister'
+      });
+    },
     registerkUser: function(){
       this.$router.push({
         name: 'accountregister'
@@ -90,9 +95,9 @@ export default {
     dologin: function() {
       var _self = this;
       _self.loadingInstance.text = '登录系统，请稍等！';
-      _self.$axios.all([_self.loadMenus()])
-        .then(_self.$axios.spread(function(userMenusResponse) {
-
+      _self.$axios.all([_self.loadMenus(),_self.findBroker()])
+        .then(_self.$axios.spread(function(userMenusResponse,findBrokerResponse) {
+          _self.setBroker(findBrokerResponse.data);
           _self.setUserMenus(userMenusResponse.data);
           sessionStorage.setItem('clientId','');
           sessionStorage.setItem('selfzj',[]);
@@ -115,22 +120,34 @@ export default {
       var _self = this;
       _self.loadingInstance.text = '验证加载用户信息，请稍等！';
       _self.$axios.get('/cgzdh/auth/tuser/' + this.companyloginDto.userName).then((response) => {
-        var nowtime=new Date().getTime();
-if(nowtime>response.data.amount){
-        _self.$alert('该会员已到期，为避免耽误您的使用，请登陆后及时续费！', '时间提醒', {
-                  confirmButtonText: '确定',
-                  type: 'warning'
-                });
-}else{
-  _self.$message({
-           message:'会员时长还有'+ _self.formatDuring(response.data.amount-nowtime),
-           type: 'success'
-         });
+          _self.$axios.get('/cgzdh/auth/getTime').then((res) => {
+            var nowtime=res.data;
+    if(nowtime>response.data.amount){
+            _self.$alert('该会员已到期，为避免耽误您的使用，请登陆后及时续费！', '时间提醒', {
+                      confirmButtonText: '确定',
+                      type: 'warning'
+                    });
+    }else{
+      _self.$message({
+               message:'会员时长还有'+ _self.formatDuring(response.data.amount-nowtime),
+               type: 'success'
+             });
 
-}
-        _self.setuserDetail(response.data);
-        _self.userid = response.data.id;
-        _self.dologin();
+    }
+            _self.setuserDetail(response.data);
+            _self.userid = response.data.id;
+            _self.dologin();
+
+
+
+          }).catch(function(err) {
+            _self.$message({
+              showClose: true,
+              message: '获取时间失败',
+              type: 'error'
+            });
+            _self.loadingInstance.close();
+          });
       }).catch(function(err) {
         _self.$message({
           showClose: true,
@@ -142,6 +159,9 @@ if(nowtime>response.data.amount){
     },
     loadMenus: function() {
       return this.$axios.get('/cgzdh/auth/tresources');
+    },
+    findBroker: function() {
+      return this.$axios.get('/cgzdh/auth/findBroker');
     }
   }
 }
