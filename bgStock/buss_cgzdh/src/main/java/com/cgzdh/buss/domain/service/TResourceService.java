@@ -19,8 +19,19 @@ public class TResourceService extends BaseService {
 	@Autowired
 	private BrokerRepository brokerRepository;
 
-	public List<TResourceDto> findAll() {
-		List<TResource> tResourceList = tResourceRepository.getResource();
+	public List<TResourceDto> findAll(String available) {
+		String a="2";
+		String b="2";
+		switch(available){
+		case "0":
+			a="1";
+			break;
+		case "1":
+			a="1";
+			b="1";
+			break;
+		}
+		List<TResource> tResourceList = tResourceRepository.getResource(a,b);
 		List<TResourceDto> tResourceDtoList = new ArrayList<TResourceDto>();
 		for (TResource tResource : tResourceList) {
 			TResourceDto tResourceDto = dozerUtil.map(tResource, TResourceDto.class);

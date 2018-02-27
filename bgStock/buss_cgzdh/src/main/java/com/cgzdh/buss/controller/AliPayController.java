@@ -44,7 +44,7 @@ public class AliPayController {
         String outTradeNo =UUIDTool.getUUID();
 
         //订单名称，必填
-        String subject = "量化交易";
+        String subject = "boge";
  
         System.out.println(subject);
         //付款金额，必填

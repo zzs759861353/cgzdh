@@ -7,6 +7,9 @@
         <el-form-item label="名称:">
           <el-input disabled v-model="user.name"></el-input>
         </el-form-item>
+        <el-form-item label="代理类型:">
+          <el-input disabled :value="user.userType==2?'企业代理':'个人代理'"></el-input>
+        </el-form-item>
         <el-form-item label="邀请码:">
           <el-input disabled v-model="user.id"></el-input>
         </el-form-item>

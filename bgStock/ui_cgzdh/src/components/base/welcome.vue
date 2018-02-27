@@ -1,13 +1,13 @@
 <template>
 <div id='Welcome'>
-    <el-row>
-      <div v-for="item in items" @click="onSelectMenu(item.url,item.title)">
-        <el-col :xs="6" :sm="4" :md="3" :lg="3" :xl="2">
+    <el-row >
+      <div v-for="item in items" @click="onSelectMenu(item.url,item.title)" >
+        <el-col :xs="6" :sm="4" :md="3" :lg="3" :xl="2" style='margin-bottom:20px'>
           <div class="clearfix  fs1    cursor-pointer">
             <div class="size1of111 ">
               <img v-bind:src="item.iconName" style='width:60px;height:60px'/>
             </div>
-            <div class="size1of11">
+            <div class="size1of11" >
               <span class="mls" style='white-space:nowrap;font-size:12px;color:#606060'>{{item.title}}</span>
             </div>
           </div>
@@ -51,7 +51,7 @@ _self.$message({
  });
           return;
 }
-
+this.$root.eventHub.$emit('we_select_menu', [{'name': name, 'url': url}]);
 }).catch(function(err) {
   _self.$message({
     showClose: true,
@@ -60,8 +60,10 @@ _self.$message({
   });
 });
 
-      }
-      this.$root.eventHub.$emit('we_select_menu', [{'name': name, 'url': url}]);
+}else{
+  this.$root.eventHub.$emit('we_select_menu', [{'name': name, 'url': url}]);
+}
+
       //this.$router.push(url);
     },
     changemenu: function() {

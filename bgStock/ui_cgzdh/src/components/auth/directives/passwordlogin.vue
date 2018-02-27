@@ -22,8 +22,10 @@
             <span @click='registerkUser' class="zhuce_qq">个人注册</span>
             <span @click="agentRegister" class="zhuce_wx">代理注册</span>
 
-              <span href="#">忘记密码？</span>
-
+              <!-- <span href="#" style='font-size:14px;color:#a0a0a0'>忘记密码？</span> -->
+<span style='font-size:13px;color:#b0b0b0'>
+  客服联系方式：<br />QQ:3190229319
+</span>
         </el-col>
         </el-row>
   </div>
@@ -95,7 +97,21 @@ export default {
     dologin: function() {
       var _self = this;
       _self.loadingInstance.text = '登录系统，请稍等！';
-      _self.$axios.all([_self.loadMenus(),_self.findBroker()])
+      var available=0;
+      switch (this.getuserDetail().userType) {
+        case 1:
+          available=1
+          break;
+          case 2:
+            available=2
+            break;
+            case 3:
+              available=2
+              break;
+
+
+      }
+      _self.$axios.all([_self.loadMenus(available),_self.findBroker()])
         .then(_self.$axios.spread(function(userMenusResponse,findBrokerResponse) {
           _self.setBroker(findBrokerResponse.data);
           _self.setUserMenus(userMenusResponse.data);
@@ -120,6 +136,7 @@ export default {
       var _self = this;
       _self.loadingInstance.text = '验证加载用户信息，请稍等！';
       _self.$axios.get('/cgzdh/auth/tuser/' + this.companyloginDto.userName).then((response) => {
+        if(response.data.userType==1){
           _self.$axios.get('/cgzdh/auth/getTime').then((res) => {
             var nowtime=res.data;
     if(nowtime>response.data.amount){
@@ -148,6 +165,26 @@ export default {
             });
             _self.loadingInstance.close();
           });
+        }else{
+          if(response.data.status==1){
+              _self.loadingInstance.close();
+            _self.$message({
+                     message:'该代理账户尚未审核，请联系管理员',
+                     type: 'error'
+                   });
+          }else if(response.data.status==2){
+              _self.loadingInstance.close();
+            _self.$message({
+                     message:'该账户尚未交付代理费用',
+                     type: 'error'
+                   });
+          }else{
+            _self.setuserDetail(response.data);
+            _self.userid = response.data.id;
+            _self.dologin();
+          }
+
+        }
       }).catch(function(err) {
         _self.$message({
           showClose: true,
@@ -156,9 +193,10 @@ export default {
         });
         _self.loadingInstance.close();
       });
+
     },
-    loadMenus: function() {
-      return this.$axios.get('/cgzdh/auth/tresources');
+    loadMenus: function(available) {
+      return this.$axios.get('/cgzdh/auth/tresources',{params:{available}});
     },
     findBroker: function() {
       return this.$axios.get('/cgzdh/auth/findBroker');

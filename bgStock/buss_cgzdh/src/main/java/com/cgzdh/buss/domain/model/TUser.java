@@ -66,6 +66,7 @@ public class TUser implements Serializable {
 	private Date validityDate;
 	private Timestamp amount;
 	private String recomender;
+	private int userType;
 
 
 }
