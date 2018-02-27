@@ -41,80 +41,60 @@
                     </el-checkbox>
     <span style='margin-left:10px;font-size:12px'>已阅读并同意<a @click="dialogVisible = true" target="_blank"><span class="lan">《搏格量化大师使用协议》</span></a></span>
     <el-dialog title="搏格量化大师注册及软件产品许可使用协议" :visible.sync="dialogVisible" center style='min-width:800px;text-align:center;padding:0;margin:0'>
-    <div style='text-align:left;padding:0 40px;font-size:12px'>
-
-      <h3>软件代理授权合同</h3>
-    <h4>特别提醒：</h4>本合同由乙方（又称“贵公司”、“您”）和深圳市搏格教育咨询有限公司（又称“甲方”）<br />于  {{nowtime.getFullYear()}} 年 {{nowtime.getMonth()+1}}  月 {{nowtime.getDate()}} 日   日,共同签署，<br />本协议适用乙方代理甲方软件（搏格量化大师），线上线下的全部活动。双方均认可该软件协议的法律效力。为保障乙方的合法权益，在确定签署之前，请乙方务必仔细阅读合同所有条款，特别是以粗体标注的条款。请乙方在确认前务必咨询确认核对，如有任何异议，请立即停止后续确认签署行为并即时与客服联系。
-
-    本合同以数据电文形式订立，一旦乙方确认本合同，即意味着乙方已充分理解本同，即意味着乙方已充分理解本合同所有条款的含义及相应的法律后果，同意受约束。
-    <br />
-　　甲方：深圳市搏格教育咨询有限公司<br />
-　　乙方（贵公司）：{{unitRegistDto.name}} <br />
-　　身份证号：{{unitRegistDto.idNumber}}<br />
-　　手机号：{{unitRegistDto.mobile}}<br />
-
-    本着诚实信用、互惠互利的原则，经双方友好协商，并根据中华人民共和国法律、法规，在平等互利的基础上签署本经销协议。
-    　　<h4>第一条　产品、要求及期限：</h4>
-    　　1．乙方为甲方产品《_搏格量化大师软件》的代理商。<br />
-    　　2．乙方代理甲方提供的《搏格量化大师软件》，并从事产品的售后服务和宣传促销等合法商业活动。<br />
-    　　3．乙方为甲方代理产品的期限为：<br />
-　　自  {{nowtime.getFullYear()}} 年 {{nowtime.getMonth()+1}}  月 {{nowtime.getDate()}} 日   起<br />
-　　至  {{nowtime.getFullYear()+1}} 年 {{nowtime.getMonth()+1}}  月 {{nowtime.getDate()}} 日   止。<br />
-    　　
-    <h4>第二条　合作方式：</h4>
-    　　1．乙方为甲方的搏格量化大师代理商，具备软件的销售权和营销权，但乙方不能对甲方的软件进行反编译或进行软件破解，任何违反国家知识产权法的行为甲方将追究法律责任。<br />
-    　　2、甲方为乙方提供独立的管理界面，具备独立的客户注册链接 <br />
-    　　3、甲乙双方的任何一方对另一方的商业行为和法律行为及经营损失不承担责任。
-
-    <h4>第三条 甲方的责任，权利和义务</h4>
-    　　1、甲方为乙方提供销售所需的技术资料及宣传资料。<br />
-    　　2、指导协调乙方的销售行为，最大限度地占领市场。<br />
-    　　3、负责产品的市场推广及销售策划工作，积极配合乙方做好市场宣传活动。<br />
-    　　4、如果甲方调整代理产品市场零售价格，甲方将给予乙方价格保护。<br />
-    　　5、代理产品的价格制定权，发布权在甲方，甲乙双方均有保守价格的责任。
-
-    <h4>第四条 乙方的责任、权利和义务</h4>
-    　　1、乙方保证严格尊重产品版权及商标权，保证不以任何方式重做、复制、拷贝或泄露、传播、散布所代理产品及序列号，保证不以任何方式对所代理产品进行解剖、汇编、反汇编。<br />
-    　　2、乙方不得销售代理产品的非法渠道版本，否则一经发现将撤消其代理资格，并扣除所有返利作为罚金。甲方保留追究其法律责任的权利
-    　　
-    <h4>第五条　结算：</h4>
-
-    　　1．甲方按照乙方税后销售额等级进行支付乙方收益。<br />
-    　　　　支付比例如下：<br />
-    　　　　　　乙方月销售额<50万元            则收益为税销售额 50%<br />
-    　　　　　　50万元<乙方月销售额 <100万元   则收益比例为税后销售额60%<br />
-    　　　　　　乙方月销售额>100万元            则收益比例为税后销售额65%<br />
-    　　2、甲方于每月1号，支付上个月收益于乙方
-    　　
-    <h4>第六条　售后服务：</h4>
-    　　1．甲方为《搏格量化大师软件》提供使用期内免费升级和网上支持
-    　　
-
-    <h4>第七条　合同的变更和终止：</h4>
-    　　1．经双方协商一致，可另行签订补充条款，对本合同进行修改。<br />
-    　　2．未经甲方书面同意，乙方不得将本合同中任何权利转让第三方。<br />
-    　　3．本合同所定的销售期满，本合同即予终止。乙方如要续约，须于合同期满前30天内  向甲方提出申请，经甲方同意后，双方另签合同；若未于该期限内提出续约申请，则依本合同期限规定终止本合同。
-
-    <h4>第八条</h4>
-    　　1、本协议的签订、履行、终止、解释均适用中华人民共合国法律。<br />
-    　　2、本协议在履行过程中，如果发生任何争执或纠纷，双方应友好协商解决；若协商不成，任何一方均有权向甲方所在地的人民法院提起诉讼。
-    　　
-    <h4>第九条　其他：</h4>
-    　　1、各方可以书面协议方式对本协议作出修改和补充。经过各方协议签署的有关本协议的修改协议和补充协议是本协议的组成部分，具有与本协议同等的法律效力。<br />
-    　　2、本协议可以一份或者多份并且每一份具有同等的法律效力，并永远保存在甲方为此设立的专用服务器上备查和保管。
-
-
-    <h3>合同签署</h3>
-    甲方：深圳市搏格教育咨询有限公司，   于  {{nowtime.getFullYear()}} 年 {{nowtime.getMonth()+1}}  月 {{nowtime.getDate()}} 日   签署本合同。<br />
-    乙方：{{unitRegistDto.name}}，身份证：{{unitRegistDto.idNumber}} ，于  {{nowtime.getFullYear()}} 年  {{nowtime.getMonth()+1}}  月 {{nowtime.getDate()}}  日   签署本合同
-
-    <br />
-
-
-
-
-      <el-button type="primary" style='float:right' @click="dialogVisible = false">确 定</el-button></br>
-    </div>
+      <div id='div'  style='text-align:left;padding:0 40px;font-size:12px'>
+    <h3>软件代理授权合同</h3>
+    <h4>特别提醒：</h4>
+  本合同由乙方（又称“贵公司”、“您”）和深圳市搏格教育咨询有限公司（又称“甲方”）<p>于{{nowtime.getFullYear()}}年{{nowtime.getMonth()+1}}月{{nowtime.getDate()}}日,共同签署，</p>
+  本协议适用乙方代理甲方软件（搏格量化大师），线上线下的全部活动。双方均认可该软件协议的法律效力。为保障乙方的合法权益，在确定签署之前，请乙方务必仔细阅读合同所有条款，特别是以粗体标注的条款。请乙方在确认前务必咨询确认核对，如有任何异议，请立即停止后续确认签署行为并即时与客服联系。
+  本合同以数据电文形式订立，一旦乙方确认本合同，即意味着乙方已充分理解本同，即意味着乙方已充分理解本合同所有条款的含义及相应的法律后果，同意受约束。
+  <p>甲方：深圳市搏格教育咨询有限公司</p>
+  <p>乙方（贵公司）：{{unitRegistDto.name}}</p>
+  <p>身份证号：{{unitRegistDto.idNumber}}</p>
+  <p>手机号：{{unitRegistDto.mobile}}</p>
+  本着诚实信用、互惠互利的原则，经双方友好协商，并根据中华人民共和国法律、法规，在平等互利的基础上签署本经销协议。
+  <h4>第一条，产品、要求及期限：</h4>
+  <p>1．乙方为甲方产品《_搏格量化大师软件》的代理商。</p>
+  <p>2．乙方代理甲方提供的《搏格量化大师软件》，并从事产品的售后服务和宣传促销等合法商业活动。</p>
+  <p>3．乙方为甲方代理产品的期限为：</p>
+  <p>自{{nowtime.getFullYear()}}年{{nowtime.getMonth()+1}}月{{nowtime.getDate()}}日起</p>
+  <p>至{{nowtime.getFullYear()+1}}年{{nowtime.getMonth()+1}}月{{nowtime.getDate()}}日止。</p> 　　
+  <h4>第二条，合作方式：</h4>
+  <p>1．乙方为甲方的搏格量化大师代理商，具备软件的销售权和营销权，但乙方不能对甲方的软件进行反编译或进行软件破解，任何违反国家知识产权法的行为甲方将追究法律责任。</p>
+  <p>2、甲方为乙方提供独立的管理界面，具备独立的客户注册链接。</p>
+  <p>3、甲乙双方的任何一方对另一方的商业行为和法律行为及经营损失不承担责任。<p>
+  <h4>第三条，甲方的责任，权利和义务</h4>
+  <p>1、甲方为乙方提供销售所需的技术资料及宣传资料。</p>
+  <p>2、指导协调乙方的销售行为，最大限度地占领市场。</p>
+  <p>3、负责产品的市场推广及销售策划工作，积极配合乙方做好市场宣传活动。</p>
+  <p>4、如果甲方调整代理产品市场零售价格，甲方将给予乙方价格保护。</p>
+  <p>5、代理产品的价格制定权，发布权在甲方，甲乙双方均有保守价格的责任。</p>
+  <h4>第四条，乙方的责任、权利和义务</h4>
+  <p>1、乙方保证严格尊重产品版权及商标权，保证不以任何方式重做、复制、拷贝或泄露、传播、散布所代理产品及序列号，保证不以任何方式对所代理产品进行解剖、汇编、反汇编。</p>
+  <p>2、乙方不得销售代理产品的非法渠道版本，否则一经发现将撤消其代理资格，并扣除所有返利作为罚金。甲方保留追究其法律责任的权利</p>
+  <h4>第五条，结算：</h4>
+  <p>1．甲方按照乙方税后销售额等级进行支付乙方收益。</p>
+  <p>支付比例如下：</p>
+  <p>乙方月销售额＜50万元，则收益为税销售额 50%</p>
+  <p>50万元＜乙方月销售额 <100万元，则收益比例为税后销售额60%</p>
+  <p>乙方月销售额＞100万元，则收益比例为税后销售额65%</p>
+  <p>2、甲方于每月1号，支付上个月收益于乙方</p>  　　
+  <h4>第六条，售后服务：</h4>
+  1．甲方为《搏格量化大师软件》提供使用期内免费升级和网上支持  　　
+  <h4>第七条，合同的变更和终止：</h4>
+  <p>1．经双方协商一致，可另行签订补充条款，对本合同进行修改。</p>
+  <p>2．未经甲方书面同意，乙方不得将本合同中任何权利转让第三方。</p>
+  <p>3．本合同所定的销售期满，本合同即予终止。乙方如要续约，须于合同期满前30天内  向甲方提出申请，经甲方同意后，双方另签合同；若未于该期限内提出续约申请，则依本合同期限规定终止本合同。<p>
+  <h4>第八条</h4>
+  <p>1、本协议的签订、履行、终止、解释均适用中华人民共合国法律。</p>
+  <p>2、本协议在履行过程中，如果发生任何争执或纠纷，双方应友好协商解决；若协商不成，任何一方均有权向甲方所在地的人民法院提起诉讼。</p>　　
+  <h4>第九条，其他：</h4>
+  <p>1、各方可以书面协议方式对本协议作出修改和补充。经过各方协议签署的有关本协议的修改协议和补充协议是本协议的组成部分，具有与本协议同等的法律效力。</p>
+  <p>2、本协议可以一份或者多份并且每一份具有同等的法律效力，并永远保存在甲方为此设立的专用服务器上备查和保管。</p>
+  <h3>合同签署</h3>
+  <p>甲方：深圳市搏格教育咨询有限公司，于{{nowtime.getFullYear()}}年{{nowtime.getMonth()+1}}月{{nowtime.getDate()}}日，签署本合同。</p>
+  <p>乙方：{{unitRegistDto.name}}，身份证号：{{unitRegistDto.idNumber}}，于{{nowtime.getFullYear()}}年{{nowtime.getMonth()+1}}月{{nowtime.getDate()}}日，签署本合同</p>
+  </div>
+        <el-button type="primary" style='float:right;margin:40px 0' @click="cutDiv">确 定</el-button>
     </el-dialog>
 
 
@@ -159,7 +139,7 @@
 
                     <el-checkbox v-model='xy'style='float:left'>
                     </el-checkbox>
-    <span style='margin-left:10px;font-size:12px'>已阅读并同意<a @click="dialogVisible = true" target="_blank"><span class="lan">《搏格量化大师使用协议》</span></a></span>
+    <span style='margin-left:10px;font-size:12px'>已阅读并同意<a @click="dialogVisible = true" target="_blank"><span class="lan">《搏格量化大师代理协议》</span></a></span>
     <el-dialog title="" :visible.sync="dialogVisible" center style='min-width:800px;text-align:center;padding:0;margin:0'>
 
     <div id='div'  style='text-align:left;padding:0 40px;font-size:12px'>
@@ -213,13 +193,13 @@
 <p>甲方：深圳市搏格教育咨询有限公司，于{{nowtime.getFullYear()}}年{{nowtime.getMonth()+1}}月{{nowtime.getDate()}}日，签署本合同。</p>
 <p>乙方：{{unitRegistDto.name}}，于{{nowtime.getFullYear()}}年{{nowtime.getMonth()+1}}月{{nowtime.getDate()}}日，签署本合同</p>
 </div>
-      <el-button type="primary" style='float:right' @click="cutDiv">确 定</el-button>
+      <el-button type="primary" style='float:right;margin:40px 0' @click="cutDiv">确 定</el-button>
     </el-dialog>
 
 
         </el-form-item>
             <el-form-item >
-          <input name="返回" type="button" @click='goLogin' class="btn_zhuce" value="返回"><input name="注册" type="button" @click='addUser(2)' style='margin-left:10px' class="btn_zhuce" value="注册">
+          <input name="返回" type="button" @click='goLogin' class="btn_zhuce"  value="返回"><input name="注册" type="button" @click='addUser(2)' style='margin-left:10px' class="btn_zhuce" value="注册">
         </el-form-item>
           </el-form>
 
@@ -343,20 +323,21 @@ export default {
     var divContent = document.getElementById("div").innerHTML;
 console.log(divContent)
     var data = "data:image/svg+xml," +
-    "<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='1200'>" +
+    "<svg xmlns='http://www.w3.org/2000/svg' >" +
    "<foreignObject width='100%' height='100%'>" +
-   "<div xmlns='http://www.w3.org/1999/xhtml'>" +
+   "<div xmlns='http://www.w3.org/1999/xhtml' style='background-color:#fff;padding:20px 40px;font-size:12px;color:#505050'>" +
    divContent +
    "</div>" +
    "</foreignObject>" +
    "</svg>";
     var img = new Image();
     img.src = data;
+
     var canvas = document.createElement("canvas");
+    canvas.width = "675";
+    canvas.height = "1650";
     var ctx =  canvas.getContext("2d");
     img.crossOrigin="anonymous";
-    img.src = data;
-
     ctx.drawImage(img, 0, 0);
     var type = 'png';
     var canvasbase = canvas.toDataURL(type);
